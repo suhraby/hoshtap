@@ -20,6 +20,7 @@ import EyeCloseIcon from './EyeCloseIcon.vue';
 import EyeIcon from './EyeIcon.vue';
 import FlagIcon from './FlagIcon.vue';
 import FolderIcon from './FolderIcon.vue';
+import GalleryIcon from './GalleryIcon.vue';
 import GlobeIcon from './GlobeIcon.vue';
 import GridIcon from './GridIcon.vue';
 import HomeIcon from './HomeIcon.vue';
@@ -78,6 +79,7 @@ export {
     EyeIcon,
     FlagIcon,
     FolderIcon,
+    GalleryIcon,
     GlobeIcon,
     GridIcon,
     HomeIcon,

@@ -68,7 +68,7 @@
                     v-model="localSearch"
                     type="text"
                     placeholder="Search..."
-                    class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-4 pl-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-[300px] dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                    class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-4 pl-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-75 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                 />
             </div>
         </div>
@@ -246,12 +246,12 @@
 import { EyeIcon, PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
 import type { PaginatedResponse } from '@/types';
 import { router } from '@inertiajs/vue3';
-import { ref, watch } from 'vue';
+import { ComputedRef, ref, watch } from 'vue';
 import PaginationWithButton from './PaginationWithButton.vue';
 
 export interface TableColumn {
     key: string;
-    label: string;
+    label: string | ComputedRef<string>;
     sortable?: boolean;
 }
 
@@ -300,7 +300,7 @@ function fetchData(
         sortOrder?: SortOrder;
     } = {},
 ): void {
-    const params: Record<string, unknown> = {
+    const raw: Record<string, unknown> = {
         page: overrides.page ?? props.data.meta.current_page,
         limit: overrides.limit ?? localLimit.value,
         searchTerm: overrides.searchTerm ?? localSearch.value,
@@ -308,11 +308,13 @@ function fetchData(
         sortOrder: overrides.sortOrder ?? localSortOrder.value,
     };
 
-    for (const k of Object.keys(params)) {
-        if (params[k] === '' || params[k] === null || params[k] === undefined) {
-            delete params[k];
+    for (const k of Object.keys(raw)) {
+        if (raw[k] === '' || raw[k] === null || raw[k] === undefined) {
+            delete raw[k];
         }
     }
+
+    const params = raw as Record<string, string>;
 
     router.get(
         props.routeName ? route(props.routeName) : window.location.pathname,

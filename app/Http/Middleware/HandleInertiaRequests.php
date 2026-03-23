@@ -40,6 +40,11 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'locale' => session('locale', config('app.locale')),
+            'locales' => [
+                ['code' => 'en', 'label' => 'English'],
+                ['code' => 'ru', 'label' => 'Русский'],
+                ['code' => 'tm', 'label' => 'Turkmençe'],
+            ],
             'auth' => [
                 'user' => $request->user(),
             ],

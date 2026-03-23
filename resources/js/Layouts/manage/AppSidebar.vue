@@ -76,7 +76,7 @@
                         <ul class="flex flex-col gap-4">
                             <li
                                 v-for="(item, index) in menuGroup.items"
-                                :key="item.name"
+                                :key="index"
                             >
                                 <!-- Item with subItems -->
                                 <button
@@ -178,8 +178,10 @@
                                     >
                                         <ul class="mt-2 ml-9 space-y-1">
                                             <li
-                                                v-for="subItem in item.subItems"
-                                                :key="subItem.name"
+                                                v-for="(
+                                                    subItem, index
+                                                ) in item.subItems"
+                                                :key="index"
                                             >
                                                 <Link
                                                     :href="subItem.path"
@@ -312,8 +314,6 @@
                     </div>
                 </div>
             </nav>
-
-            <!-- <SwitchLocale /> -->
         </div>
     </aside>
 </template>
@@ -323,6 +323,7 @@ import { computed, ComputedRef, ref, type Component } from 'vue';
 
 import {
     ChevronDownIcon,
+    GalleryIcon,
     GlobeIcon,
     GridIcon,
     HorizontalDots,
@@ -357,7 +358,6 @@ interface MenuGroup {
 }
 
 const { lang, setLang } = useLocale();
-// const { t } = useI();
 const { isExpanded, isMobileOpen, isHovered, openSubmenu } = useSidebar();
 const page = usePage();
 const currentPath = computed((): string => page.url.split('?')[0]);
@@ -387,6 +387,12 @@ const menuGroups: MenuGroup[] = [
                 icon: GridIcon,
                 name: wTrans('Dashboard'),
                 path: '/manage',
+                exact: true,
+            },
+            {
+                icon: GalleryIcon,
+                name: wTrans('Banners'),
+                path: '/manage/banners',
                 exact: true,
             },
             {

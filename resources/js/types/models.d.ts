@@ -1,3 +1,5 @@
+import { LocalizedText } from './responses';
+
 export interface User {
     id: number;
     name: string;
@@ -5,4 +7,13 @@ export interface User {
     username: string;
     email_verified_at?: string;
     created_at: string;
+}
+
+export interface Banner {
+    id: number;
+    title: LocalizedText;
+    image: string;
+    thumbnail: string;
+    original: string;
+    [key: string]: unknown;
 }

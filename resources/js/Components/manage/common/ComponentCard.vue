@@ -39,9 +39,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { defineProps } from 'vue';
-
+<script lang="ts" setup>
 interface Props {
     title?: string;
     className?: string;
