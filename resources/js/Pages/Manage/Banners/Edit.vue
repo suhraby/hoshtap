@@ -1,8 +1,8 @@
 <template>
-    <Head :title="currentPageTitle" />
+    <Head :title="String(currentPageTitle)" />
 
     <AdminLayout>
-        <PageBreadcrumb :page-title="currentPageTitle" />
+        <PageBreadcrumb :page-title="String(currentPageTitle)" />
 
         <ComponentCard>
             <form @submit.prevent="onSubmit">
@@ -31,7 +31,25 @@
 
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div class="sm:col-span-2">
-                        <InputLabel :value="$t('Banner image')" required />
+                        <InputLabel :value="$t('Banner image')" />
+
+                        <div v-if="banner.data.thumbnail" class="mb-3">
+                            <img
+                                :src="banner.data.thumbnail"
+                                class="h-24 w-36 rounded-lg object-cover"
+                                alt="current banner"
+                            />
+                            <p
+                                class="mt-1 text-xs text-gray-500 dark:text-gray-400"
+                            >
+                                {{
+                                    $t(
+                                        'Current image — upload a new one to replace it',
+                                    )
+                                }}
+                            </p>
+                        </div>
+
                         <FileInput
                             accept="image/*"
                             :error="form.errors.file"
@@ -70,26 +88,40 @@ import FileInput from '@/Components/manage/forms/FileInput.vue';
 import InputError from '@/Components/manage/forms/InputError.vue';
 import InputField from '@/Components/manage/forms/InputField.vue';
 import InputLabel from '@/Components/manage/forms/InputLabel.vue';
-import { useLocales } from '@/composables/useLocale';
+import { useLocale, useLocales } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
+import type { Banner, ResourceResponse } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { trans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
 
 const { locales } = useLocales();
+const { lang } = useLocale();
 
-const currentPageTitle = computed(() => trans('Create new banner'));
+const props = defineProps<{
+    banner: ResourceResponse<Banner>;
+}>();
+
+const currentPageTitle = computed(() =>
+    trans('Edit banner: :title', {
+        title:
+            props.banner.data.title[lang.value] ??
+            props.banner.data.title['en'],
+    }),
+);
 
 const form = useForm({
-    title: Object.fromEntries(locales.value.map((l) => [l.code, ''])) as Record<
-        string,
-        string
-    >,
+    title: Object.fromEntries(
+        locales.value.map((l) => [
+            l.code,
+            props.banner.data.title[l.code] ?? '',
+        ]),
+    ) as Record<string, string>,
     file: null as File | null,
 });
 
 function onSubmit(): void {
-    form.post(route('manage.banners.store'), {
+    form.patch(route('manage.banners.update', props.banner.data.id), {
         preserveScroll: true,
     });
 }

@@ -269,5 +269,10 @@
     "Previous": "Предыдущая",
     "Next": "Следующая",
     "Showing :from to :to of :total entries": "Показано с :from по :to из :total записей",
+    "Create new banner": "Создать новый баннер",
+    "Edit banner: :title": "Редактировать баннер: :title",
+    "Saving": "Сохранение",
+    "Current image — upload a new one to replace it": "Текущее изображение — загрузите новое, чтобы заменить его",
+    "Banner image": "Изображение баннера",
     "a": "a"
 }

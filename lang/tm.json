@@ -189,9 +189,9 @@
     "Restore :name": ":name-ny dikelt",
     "results": "Netijeler",
     "Retry With": "Gaýtadan synanyşyň",
-    "Save": "Saklaň",
-    "Save & Close": "Saklamak we ýapmak",
-    "Save & Return": "Saklamak we yzyna gaýtarmak",
+    "Save": "Ýatda saklamak",
+    "Save & Close": "Ýatda saklamak we ýapmak",
+    "Save & Return": "Ýatda saklamak we yzyna gaýtarmak",
     "Save :name": ":name-ny ýazdyryň",
     "Saved.": "Saklandy.",
     "Search": "Gözleg",
@@ -269,5 +269,10 @@
     "Previous": "Öňki",
     "Next": "Indiki",
     "Showing :from to :to of :total entries": "Jemi :total ýazgydan :from - :to aralygy görkezilýär",
+    "Create new banner": "Täze banner döret",
+    "Edit banner: :title": "Banneri üýtgetmek: :title",
+    "Saving": "Ýatda saklanýar",
+    "Current image — upload a new one to replace it": "Häzirki surat — ony çalyşmak üçin täze surat ýükläň",
+    "Banner image": "Banner suraty",
     "a": "a"
 }

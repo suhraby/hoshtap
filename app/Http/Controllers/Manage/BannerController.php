@@ -77,7 +77,44 @@ class BannerController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to create cargo. Please try again.');
+                ->with('error', 'Failed to create banner. Please try again.');
+        }
+    }
+
+    public function edit(Banner $banner): \Inertia\Response
+    {
+        return Inertia::render('Manage/Banners/Edit', [
+            'banner' => new BannerResource($banner)
+        ]);
+    }
+
+    public function update(BannerRequest $request, Banner $banner)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data = $request->validated();
+            $banner->update([
+                'title' => $data['title'],
+            ]);
+
+            if ($request->hasFile('file')) {
+                $banner->addMediaFromRequest('file')
+                    ->usingName($data['title']['en'])
+                    ->usingFileName(Str::slug($data['title']['en']) . '.' . $request->file('file')->getClientOriginalExtension())
+                    ->toMediaCollection('banner_image');
+            }
+
+            DB::commit();
+
+            return Redirect::route('manage.banners.index')->with('success', 'Banner has been updated.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Post creation failed: ' . $e->getMessage());
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to update banner. Please try again.');
         }
     }
 

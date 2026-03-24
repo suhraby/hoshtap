@@ -9,6 +9,7 @@ export interface LocalizedText {
     en: string;
     ru: string;
     tm: string;
+    [key: string]: string;
 }
 
 export interface PaginationLink {
