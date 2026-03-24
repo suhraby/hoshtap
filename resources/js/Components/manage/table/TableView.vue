@@ -4,7 +4,9 @@
             class="flex flex-col gap-2 rounded-t-xl border border-b-0 border-gray-100 px-4 py-4 sm:flex-row sm:items-center sm:justify-between dark:border-white/5"
         >
             <div class="flex items-center gap-3">
-                <span class="text-gray-500 dark:text-gray-400">Show</span>
+                <span class="text-gray-500 dark:text-gray-400">{{
+                    $t('Show')
+                }}</span>
                 <div class="relative z-20 bg-transparent">
                     <select
                         v-model.number="localLimit"
@@ -23,51 +25,24 @@
                     <span
                         class="pointer-events-none absolute top-1/2 right-2 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400"
                     >
-                        <svg
-                            class="stroke-current"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M3.8335 5.9165L8.00016 10.0832L12.1668 5.9165"
-                                stroke=""
-                                stroke-width="1.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
+                        <ChevronDownIcon class="h-4 w-4" />
                     </span>
                 </div>
-                <span class="text-gray-500 dark:text-gray-400">entries</span>
+                <span class="text-gray-500 dark:text-gray-400">{{
+                    $t('entries')
+                }}</span>
             </div>
 
             <div class="relative">
                 <span
                     class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-gray-500 dark:text-gray-400"
                 >
-                    <svg
-                        class="fill-current"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M3.04199 9.37363C3.04199 5.87693 5.87735 3.04199 9.37533 3.04199C12.8733 3.04199 15.7087 5.87693 15.7087 9.37363C15.7087 12.8703 12.8733 15.7053 9.37533 15.7053C5.87735 15.7053 3.04199 12.8703 3.04199 9.37363ZM9.37533 1.54199C5.04926 1.54199 1.54199 5.04817 1.54199 9.37363C1.54199 13.6991 5.04926 17.2053 9.37533 17.2053C11.2676 17.2053 13.0032 16.5344 14.3572 15.4176L17.1773 18.238C17.4702 18.5309 17.945 18.5309 18.2379 18.238C18.5308 17.9451 18.5309 17.4703 18.238 17.1773L15.4182 14.3573C16.5367 13.0033 17.2087 11.2669 17.2087 9.37363C17.2087 5.04817 13.7014 1.54199 9.37533 1.54199Z"
-                            fill=""
-                        />
-                    </svg>
+                    <SearchIcon />
                 </span>
                 <input
                     v-model="localSearch"
                     type="text"
-                    placeholder="Search..."
+                    :placeholder="$t('Search') + '...'"
                     class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-4 pl-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-75 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                 />
             </div>
@@ -148,7 +123,7 @@
                             <p
                                 class="text-theme-xs font-medium text-gray-700 dark:text-gray-400"
                             >
-                                Action
+                                {{ $t('Action') }}
                             </p>
                         </th>
                     </tr>
@@ -211,7 +186,7 @@
                             :colspan="columns.length + 1"
                             class="px-4 py-10 text-center text-sm text-gray-500 dark:text-gray-400"
                         >
-                            No results found.
+                            {{ $t('No results found.') }}
                         </td>
                     </tr>
                 </tbody>
@@ -233,8 +208,13 @@
                     <p
                         class="border-t border-gray-100 pt-3 text-center text-sm font-medium text-gray-500 xl:border-t-0 xl:pt-0 xl:text-left dark:border-gray-800 dark:text-gray-400"
                     >
-                        Showing {{ data.meta.from ?? 0 }} to
-                        {{ data.meta.to ?? 0 }} of {{ data.meta.total }} entries
+                        {{
+                            $t('Showing :from to :to of :total entries', {
+                                from: String(data.meta.from ?? 0),
+                                to: String(data.meta.to ?? 0),
+                                total: String(data.meta.total),
+                            })
+                        }}
                     </p>
                 </div>
             </div>
@@ -243,7 +223,13 @@
 </template>
 
 <script lang="ts" setup>
-import { EyeIcon, PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
+import {
+    ChevronDownIcon,
+    EyeIcon,
+    PencilIcon,
+    SearchIcon,
+    TrashBinIcon,
+} from '@/Components/manage/icons';
 import type { PaginatedResponse } from '@/types';
 import { router } from '@inertiajs/vue3';
 import { ComputedRef, ref, watch } from 'vue';

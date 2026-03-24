@@ -259,5 +259,15 @@
     "Yes": "Да",
     "You are receiving this email because we received a password reset request for your account.": "Вы получили это письмо, потому что мы получили запрос на сброс пароля для Вашей учётной записи.",
     "You're logged in!": "Вы уже вошли.",
-    "Your email address is unverified.": "Ваш адрес электронной почты не подтверждён."
+    "Your email address is unverified.": "Ваш адрес электронной почты не подтверждён.",
+    "Banner": "Баннер",
+    "Banners": "Баннеры",
+    "Create new": "Создать",
+    "entries": "записей",
+    "Title": "Название",
+    "No results found.": "Ничего не найдено.",
+    "Previous": "Предыдущая",
+    "Next": "Следующая",
+    "Showing :from to :to of :total entries": "Показано с :from по :to из :total записей",
+    "a": "a"
 }

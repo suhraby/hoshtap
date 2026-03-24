@@ -42,6 +42,7 @@ import PieChartIcon from './PieChartIcon.vue';
 import PlugInIcon from './PlugInIcon.vue';
 import PlusIcon from './PlusIcon.vue';
 import RefreshIcon from './RefreshIcon.vue';
+import SearchIcon from './SearchIcon.vue';
 import SendIcon from './SendIcon.vue';
 import SettingsIcon from './SettingsIcon.vue';
 import StaredIcon from './StaredIcon.vue';
@@ -101,6 +102,7 @@ export {
     PlugInIcon,
     PlusIcon,
     RefreshIcon,
+    SearchIcon,
     SendIcon,
     SettingsIcon,
     StaredIcon,

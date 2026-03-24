@@ -62,11 +62,10 @@ import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
 import type { Banner, PaginatedResponse } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { wTrans } from 'laravel-vue-i18n';
-import { ref } from 'vue';
 
 const { t } = useTranslatable();
 
-const currentPageTitle = ref('Banners');
+const currentPageTitle = wTrans('Banners');
 
 const columns = [
     { key: 'thumbnail', label: wTrans('Image'), sortable: false },

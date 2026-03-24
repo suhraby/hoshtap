@@ -13,7 +13,7 @@
                         class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
                         :href="route('manage.index')"
                     >
-                        Home
+                        {{ $t('Home') }}
                         <svg
                             class="stroke-current"
                             width="17"
@@ -42,7 +42,6 @@
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
 
 interface BreadcrumbProps {
     pageTitle: string;

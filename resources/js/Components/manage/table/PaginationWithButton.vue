@@ -5,7 +5,7 @@
             :disabled="currentPage === 1"
             class="shadow-theme-xs flex h-10 items-center gap-2 rounded-lg border border-gray-300 bg-white p-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-50 sm:p-2.5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/3 dark:hover:text-gray-200"
         >
-            Previous
+            {{ $t('Previous') }}
         </button>
 
         <ul class="flex items-center gap-1">
@@ -38,7 +38,7 @@
             :disabled="currentPage === totalPages"
             class="shadow-theme-xs flex h-10 items-center gap-2 rounded-lg border border-gray-300 bg-white p-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-50 sm:p-2.5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/3 dark:hover:text-gray-200"
         >
-            Next
+            {{ $t('Next') }}
         </button>
     </div>
 </template>
