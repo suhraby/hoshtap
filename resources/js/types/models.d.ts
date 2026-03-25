@@ -17,3 +17,10 @@ export interface Banner {
     original: string;
     [key: string]: unknown;
 }
+
+export interface About {
+    id: number;
+    title: LocalizedText;
+    body: LocalizedText;
+    image: string;
+}

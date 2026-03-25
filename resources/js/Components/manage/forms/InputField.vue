@@ -6,31 +6,33 @@
         ref="input"
         v-bind="$attrs"
     />
-    <div v-if="isPasswordField" class="relative">
+    <template v-else>
+        <div v-if="isPasswordField" class="relative">
+            <input
+                :class="inputClass"
+                v-model="model"
+                ref="input"
+                v-bind="$attrs"
+                :type="showPassword ? 'text' : 'password'"
+            />
+
+            <span
+                v-show="isPasswordField"
+                @click="togglePasswordVisibility"
+                class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-gray-500 dark:text-gray-400"
+            >
+                <EyeCloseIcon v-if="!showPassword" class="text-gray-400" />
+                <EyeIcon v-else class="text-gray-400" />
+            </span>
+        </div>
         <input
+            v-else
             :class="inputClass"
             v-model="model"
             ref="input"
             v-bind="$attrs"
-            :type="showPassword ? 'text' : 'password'"
         />
-
-        <span
-            v-show="isPasswordField"
-            @click="togglePasswordVisibility"
-            class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-gray-500 dark:text-gray-400"
-        >
-            <EyeCloseIcon v-if="!showPassword" class="text-gray-400" />
-            <EyeIcon v-else class="text-gray-400" />
-        </span>
-    </div>
-    <input
-        v-else
-        :class="inputClass"
-        v-model="model"
-        ref="input"
-        v-bind="$attrs"
-    />
+    </template>
 </template>
 
 <script setup lang="ts">

@@ -322,6 +322,7 @@
 import { computed, ComputedRef, ref, type Component } from 'vue';
 
 import {
+    BuildingIcon,
     ChevronDownIcon,
     GalleryIcon,
     GlobeIcon,
@@ -393,6 +394,12 @@ const menuGroups: MenuGroup[] = [
                 icon: GalleryIcon,
                 name: wTrans('Banners'),
                 path: '/manage/banners',
+                exact: true,
+            },
+            {
+                icon: BuildingIcon,
+                name: wTrans('About us'),
+                path: '/manage/about',
                 exact: true,
             },
             {

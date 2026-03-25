@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Manage\AboutController;
 use App\Http\Controllers\Manage\BannerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -33,7 +34,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', fn() => Inertia::render('Manage/Index'))->name('index');
 
-        Route::resource('banners', BannerController::class);
+        Route::resource('banners', BannerController::class)->except('show');
+
+        Route::resource('about', AboutController::class)->middleware('single.about')->except(['show']);
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

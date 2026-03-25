@@ -41,6 +41,7 @@
                                                 :error="form.errors.username"
                                                 placeholder="Enter your username"
                                                 autocomplete="username"
+                                                autofocus="username"
                                             />
                                             <InputError
                                                 :message="form.errors.username"

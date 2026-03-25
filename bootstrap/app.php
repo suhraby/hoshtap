@@ -26,6 +26,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(function (Request $request) {
             return route('manage.login');
         });
+
+        $middleware->alias([
+            'single.about' => \App\Http\Middleware\EnforceSingleAbout::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
