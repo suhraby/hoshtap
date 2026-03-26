@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Manage\AboutController;
 use App\Http\Controllers\Manage\BannerController;
+use App\Http\Controllers\Manage\CounterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,9 @@ Route::middleware('auth')
 
         Route::resource('banners', BannerController::class)->except('show');
 
-        Route::resource('about', AboutController::class)->middleware('single.about')->except(['show']);
+        Route::resource('about', AboutController::class)->middleware('single.about')->except(['show', 'destroy']);
+
+        Route::resource('counters', CounterController::class)->except(['show']);
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

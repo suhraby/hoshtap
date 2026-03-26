@@ -280,5 +280,17 @@
     "About us image": "О нас изображение",
     "Create about us": "Создать данные о нас",
     "Edit about us": "Редактировать данные о нас",
+    "Counter": "Счетчик",
+    "Counters": "Счетчики",
+    "Create new counter": "Создать новый счетчик",
+    "Edit counter: :title": "Редактировать счетчик: :title",
+    "Icon": "Иконка",
+    "Number": "Число",
+    "Symbol": "Символ",
+    "Counter title": "Название счетчика",
+    "Counter description": "Описание счетчика",
+    "Enter counter number": "Введите число счетчика",
+    "Symbol after number": "Символ после числа",
+    "Enter counter symbol": "Введите символ счетчика",
     "a": "a"
 }

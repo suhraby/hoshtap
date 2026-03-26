@@ -40,8 +40,6 @@ class BannerController extends Controller
             ->paginate($limit)
             ->withQueryString();
 
-        $banner = $banners->first();
-
         return Inertia::render('Manage/Banners/Index', [
             'banners'    => BannerResource::collection($banners),
             'limit'      => $limit,

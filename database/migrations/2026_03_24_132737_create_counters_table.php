@@ -16,7 +16,8 @@ return new class extends Migration
             $table->json('title');
             $table->json('description');
             $table->unsignedInteger('number');
-            $table->string('sign');
+            $table->string('symbol')->nullable();
+            $table->unsignedInteger('sort_order')->default(0);
             $table->timestamps();
         });
     }

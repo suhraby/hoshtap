@@ -280,6 +280,18 @@
     "About us image": "About us image",
     "Create about us": "Create about us",
     "Edit about us": "Edit about us",
+    "Counter": "Counter",
+    "Counters": "Counters",
+    "Create new counter": "Create new counter",
+    "Edit counter: :title": "Edit counter: :title",
+    "Icon": "Icon",
+    "Number": "Number",
+    "Symbol": "Symbol",
+    "Counter title": "Counter title",
+    "Counter description": "Counter description",
+    "Enter counter number": "Enter counter number",
+    "Symbol after number": "Symbol after number",
+    "Enter counter symbol": "Enter counter symbol",
     "b": "b",
     "a": "a"
 }

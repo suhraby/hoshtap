@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BannerRequest extends FormRequest
+class CounterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +21,13 @@ class BannerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'title'     => ['required', 'array'],
-            'title.*'  => ['required', 'string', 'max:255'],
-            'file'      => ['nullable', 'file', 'image', 'max:1024'],
+        return [
+            'title'         => ['required', 'array'],
+            'title.*'       => ['required', 'string', 'max:255'],
+            'description'   => ['required', 'array'],
+            'description.*' => ['required', 'string', 'max:255'],
+            'number'        => ['required', 'integer', 'min:0'],
+            'symbol'          => ['nullable', 'string', 'max:255'],
         ];
-
-        if ($this->isMethod('POST')) {
-            $rules['file'] = ['required', 'file', 'image', 'max:1024'];
-        }
-
-        return $rules;
     }
 }

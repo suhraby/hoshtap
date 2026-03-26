@@ -6,27 +6,29 @@
 
         <ComponentCard :title="currentPageTitle">
             <template #action>
-                <CreateButton :href="route('manage.banners.create')" />
+                <CreateButton :href="route('manage.counters.create')" />
             </template>
 
             <TableView
                 :columns="columns"
-                :data="banners"
+                :data="counters"
                 :initial-search="searchTerm"
                 :initial-limit="limit"
-                route-name="manage.banners.index"
+                route-name="manage.counters.index"
                 @edit="onEdit"
                 @delete="onDelete"
             >
-                <template #cell-thumbnail="{ value }">
-                    <img
-                        :src="String(value)"
-                        class="h-14 w-20 rounded object-cover"
-                        alt="banner"
-                    />
+                <template #cell-title="{ value }">
+                    <span
+                        class="block"
+                        v-for="locale in locales"
+                        :key="locale.code"
+                    >
+                        {{ (value as Record<string, string>)[locale.code] }}
+                    </span>
                 </template>
 
-                <template #cell-title="{ value }">
+                <template #cell-description="{ value }">
                     <span
                         class="block"
                         v-for="locale in locales"
@@ -65,34 +67,36 @@ import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
-import type { Banner, PaginatedResponse } from '@/types';
+import type { Counter, PaginatedResponse } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { wTrans } from 'laravel-vue-i18n';
 
 const { t } = useTranslatable();
-const {locales} = useLocales();
+const { locales } = useLocales();
 
-const currentPageTitle = wTrans('Banners');
+const currentPageTitle = wTrans('Counters');
 
 const columns = [
-    { key: 'thumbnail', label: wTrans('Image'), sortable: false },
-    { key: 'title', label: wTrans('Title'), sortable: false },
+    { key: 'title', label: wTrans('Title'), sortable: true },
+    { key: 'description', label: wTrans('Description'), sortable: false },
+    { key: 'number', label: wTrans('Number'), sortable: false },
+    { key: 'symbol', label: wTrans('Symbol'), sortable: false },
 ];
 
 defineProps<{
-    banners: PaginatedResponse<Banner>;
+    counters: PaginatedResponse<Counter>;
     limit: number;
     searchTerm: string;
 }>();
 
 function onEdit(item: Record<string, unknown>): void {
-    router.get(route('manage.banners.edit', { banner: item.id }));
+    router.get(route('manage.counters.edit', { counter: item.id }));
 }
 
 function onDelete(item: Record<string, unknown>): void {
     if (!confirm(`Are you sure you want to delete ${t(item.title)}?`)) return;
 
-    router.delete(route('manage.banners.destroy', { banner: item.id }), {
+    router.delete(route('manage.counters.destroy', { counter: item.id }), {
         preserveScroll: true,
     });
 }

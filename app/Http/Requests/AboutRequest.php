@@ -23,13 +23,9 @@ class AboutRequest extends FormRequest
     {
         $rules = [
             'title' => ['required', 'array'],
-            'title.en' => ['required', 'string', 'max:255'],
-            'title.ru' => ['required', 'string', 'max:255'],
-            'title.tm' => ['required', 'string', 'max:255'],
+            'title.*' => ['required', 'string', 'max:255'],
             'body' => ['required', 'array'],
-            'body.en' => ['required'],
-            'body.ru' => ['required'],
-            'body.tm' => ['required'],
+            'body.*' => ['required'],
             'file'      => ['nullable', 'file', 'image', 'max:1024'],
         ];
 

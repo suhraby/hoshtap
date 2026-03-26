@@ -329,6 +329,7 @@ import {
     GridIcon,
     HorizontalDots,
     ListIcon,
+    StopwatchIcon,
 } from '@/Components/manage/icons';
 import { useLocale } from '@/composables/useLocale';
 import { useSidebar } from '@/composables/useSidebar';
@@ -400,6 +401,12 @@ const menuGroups: MenuGroup[] = [
                 icon: BuildingIcon,
                 name: wTrans('About us'),
                 path: '/manage/about',
+                exact: true,
+            },
+            {
+                icon: StopwatchIcon,
+                name: wTrans('Counters'),
+                path: '/manage/counters',
                 exact: true,
             },
             {

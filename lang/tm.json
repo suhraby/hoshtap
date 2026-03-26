@@ -280,5 +280,17 @@
     "About us image": "Biz barada surady",
     "Create about us": "Biz barada maglumatyny döretmek",
     "Edit about us": "Biz barada maglumatyny üýtgetmek",
+    "Counter": "Hasap",
+    "Counters": "Hasaplar",
+    "Create new counter": "Täze hasap döret",
+    "Edit counter: :title": "Hasaby üýtgetmek: :title",
+    "Icon": "Ikonka",
+    "Number": "San",
+    "Symbol": "Simwol",
+    "Counter title": "Hasabyň ady",
+    "Counter description": "Hasabyň beýany",
+    "Enter counter number": "Hasap sanyny giriziň",
+    "Symbol after number": "Sandan soňky simwol",
+    "Enter counter symbol": "Hasap simwolyny giriziň",
     "a": "a"
 }

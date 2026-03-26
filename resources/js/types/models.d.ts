@@ -24,3 +24,13 @@ export interface About {
     body: LocalizedText;
     image: string;
 }
+
+export interface Counter {
+    id: number;
+    title: LocalizedText;
+    description: LocalizedText;
+    number: number;
+    symbol: string | null;
+    sort_order: number;
+    [key: string]: unknown;
+}

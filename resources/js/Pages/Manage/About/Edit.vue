@@ -13,10 +13,11 @@
                         class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                     >
                         <div v-for="locale in locales" :key="locale.code">
-                            <InputLabel required>
+                            <InputLabel :for="'title-' + locale.code" required>
                                 {{ $t('Title') }} ({{ locale.label }})
                             </InputLabel>
                             <InputField
+                                :id="'title-' + locale.code"
                                 type="text"
                                 v-model="form.title[locale.code]"
                                 :error="form.errors[`title.${locale.code}`]"
@@ -34,10 +35,14 @@
                 >
                     <div class="grid grid-cols-1 gap-6">
                         <div v-for="locale in locales" :key="locale.code">
-                            <InputLabel required>
+                            <InputLabel
+                                :for="'description-' + locale.code"
+                                required
+                            >
                                 {{ $t('Description') }} ({{ locale.label }})
                             </InputLabel>
                             <InputField
+                                :id="'description-' + locale.code"
                                 type="text"
                                 :multiline="true"
                                 v-model="form.body[locale.code]"

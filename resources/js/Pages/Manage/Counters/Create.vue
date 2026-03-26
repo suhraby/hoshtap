@@ -21,7 +21,7 @@
                                 type="text"
                                 v-model="form.title[locale.code]"
                                 :error="form.errors[`title.${locale.code}`]"
-                                :placeholder="`${$t('Title')} — ${locale.label}`"
+                                :placeholder="`${$t('Counter title')} — ${locale.label}`"
                             />
                             <InputError
                                 :message="form.errors[`title.${locale.code}`]"
@@ -33,7 +33,9 @@
                 <div
                     class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
                 >
-                    <div class="grid grid-cols-1 gap-6">
+                    <div
+                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
                         <div v-for="locale in locales" :key="locale.code">
                             <InputLabel
                                 :for="'description-' + locale.code"
@@ -44,27 +46,58 @@
                             <InputField
                                 :id="'description-' + locale.code"
                                 type="text"
+                                v-model="form.description[locale.code]"
                                 :multiline="true"
-                                v-model="form.body[locale.code]"
-                                :error="form.errors[`body.${locale.code}`]"
-                                :placeholder="`${$t('About us description')} — ${locale.label}`"
+                                :error="
+                                    form.errors[`description.${locale.code}`]
+                                "
+                                :placeholder="`${$t('Counter description')} — ${locale.label}`"
                             />
                             <InputError
-                                :message="form.errors[`body.${locale.code}`]"
+                                :message="
+                                    form.errors[`description.${locale.code}`]
+                                "
                             />
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div class="sm:col-span-2">
-                        <InputLabel :value="$t('About us image')" required />
-                        <FileInput
-                            accept="image/*"
-                            :error="form.errors.file"
-                            @change="form.file = $event"
+                <div class="space-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>
+                        <InputLabel
+                            for="number"
+                            :value="$t('Number')"
+                            required
                         />
-                        <InputError :message="form.errors.file" />
+                        <InputField
+                            id="number"
+                            type="number"
+                            name="number"
+                            required
+                            v-model="form.number"
+                            :error="form.errors.number"
+                            placeholder="Enter counter number"
+                            autocomplete="number"
+                            min="0"
+                        />
+                        <InputError :message="form.errors.number" />
+                    </div>
+
+                    <div>
+                        <InputLabel
+                            for="symbol"
+                            :value="$t('Symbol after number')"
+                        />
+                        <InputField
+                            id="symbol"
+                            type="text"
+                            name="symbol"
+                            v-model="form.symbol"
+                            :error="form.errors.symbol"
+                            placeholder="Enter counter symbol"
+                            autocomplete="symbol"
+                        />
+                        <InputError :message="form.errors.symbol" />
                     </div>
                 </div>
 
@@ -93,7 +126,6 @@
 <script setup lang="ts">
 import ComponentCard from '@/Components/manage/common/ComponentCard.vue';
 import PageBreadcrumb from '@/Components/manage/common/PageBreadcrumb.vue';
-import FileInput from '@/Components/manage/forms/FileInput.vue';
 import InputError from '@/Components/manage/forms/InputError.vue';
 import InputField from '@/Components/manage/forms/InputField.vue';
 import InputLabel from '@/Components/manage/forms/InputLabel.vue';
@@ -105,22 +137,22 @@ import { computed } from 'vue';
 
 const { locales } = useLocales();
 
-const currentPageTitle = computed(() => trans('Create about us'));
+const currentPageTitle = computed(() => trans('Create new counter'));
 
 const form = useForm({
     title: Object.fromEntries(locales.value.map((l) => [l.code, ''])) as Record<
         string,
         string
     >,
-    body: Object.fromEntries(locales.value.map((l) => [l.code, ''])) as Record<
-        string,
-        string
-    >,
-    file: null as File | null,
+    description: Object.fromEntries(
+        locales.value.map((l) => [l.code, '']),
+    ) as Record<string, string>,
+    number: null as number | null,
+    symbol: null as string | null,
 });
 
 function onSubmit(): void {
-    form.post(route('manage.about.store'), {
+    form.post(route('manage.counters.store'), {
         preserveScroll: true,
     });
 }
