@@ -6,31 +6,26 @@
 
         <ComponentCard :title="currentPageTitle">
             <template #action>
-                <CreateButton :href="route('manage.counters.create')" />
+                <CreateButton :href="route('manage.services.create')" />
             </template>
 
             <TableView
                 :columns="columns"
-                :data="counters"
+                :data="services"
                 :initial-search="searchTerm"
                 :initial-limit="limit"
-                route-name="manage.counters.index"
+                route-name="manage.services.index"
                 @edit="onEdit"
                 @delete="onDelete"
             >
+                <template #cell-icon="{ value }">
+                    <span v-html="normalizeSvg(value as string)"></span>
+                </template>
+
                 <template #cell-title="{ value }">
                     <span
                         class="block"
-                        v-for="locale in locales"
-                        :key="locale.code"
-                    >
-                        {{ (value as LocalizedText)[locale.code] }}
-                    </span>
-                </template>
-
-                <template #cell-description="{ value }">
-                    <span
-                        class="block"
+                        v-if="typeof value === 'object'"
                         v-for="locale in locales"
                         :key="locale.code"
                     >
@@ -67,37 +62,42 @@ import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
-import type { Counter, LocalizedText, PaginatedResponse } from '@/types';
+import type { LocalizedText, PaginatedResponse, Service } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { wTrans } from 'laravel-vue-i18n';
 
 const { t } = useTranslatable();
 const { locales } = useLocales();
 
-const currentPageTitle = wTrans('Counters');
+const currentPageTitle = wTrans('Service');
 
 const columns = [
+    { key: 'icon', label: wTrans('Icon'), sortable: false },
     { key: 'title', label: wTrans('Title'), sortable: true },
-    { key: 'description', label: wTrans('Description'), sortable: false },
-    { key: 'number', label: wTrans('Number'), sortable: false },
-    { key: 'symbol', label: wTrans('Symbol'), sortable: false },
 ];
 
 defineProps<{
-    counters: PaginatedResponse<Counter>;
+    services: PaginatedResponse<Service>;
     limit: number;
     searchTerm: string;
 }>();
 
 function onEdit(item: Record<string, unknown>): void {
-    router.get(route('manage.counters.edit', { counter: item.id }));
+    router.get(route('manage.services.edit', { service: item.id }));
 }
 
 function onDelete(item: Record<string, unknown>): void {
     if (!confirm(`Are you sure you want to delete ${t(item.title)}?`)) return;
 
-    router.delete(route('manage.counters.destroy', { counter: item.id }), {
+    router.delete(route('manage.services.destroy', { service: item.id }), {
         preserveScroll: true,
     });
+}
+
+function normalizeSvg(svg: string): string {
+    return svg
+        .replace(/width="[^"]*"/i, '')
+        .replace(/height="[^"]*"/i, '')
+        .replace('<svg', '<svg width="50" height="50"');
 }
 </script>

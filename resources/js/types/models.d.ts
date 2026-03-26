@@ -34,3 +34,10 @@ export interface Counter {
     sort_order: number;
     [key: string]: unknown;
 }
+
+export interface Service {
+    id: number;
+    title: LocalizedText;
+    icon: string;
+    [key: string]: unknown;
+}

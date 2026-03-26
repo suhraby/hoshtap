@@ -292,5 +292,11 @@
     "Enter counter number": "Введите число счетчика",
     "Symbol after number": "Символ после числа",
     "Enter counter symbol": "Введите символ счетчика",
+    "Service": "Услуга",
+    "Services": "Услуги",
+    "Create new service": "Создать новую услугу",
+    "Edit service: :title": "Редактировать услугу: :title",
+    "Service title": "Название услуги",
+    "Enter the icon": "Введите иконку",
     "a": "a"
 }

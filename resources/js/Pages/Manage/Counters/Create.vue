@@ -76,7 +76,7 @@
                             required
                             v-model="form.number"
                             :error="form.errors.number"
-                            placeholder="Enter counter number"
+                            :placeholder="$t('Enter counter number')"
                             autocomplete="number"
                             min="0"
                         />
@@ -94,7 +94,7 @@
                             name="symbol"
                             v-model="form.symbol"
                             :error="form.errors.symbol"
-                            placeholder="Enter counter symbol"
+                            :placeholder="$t('Enter counter symbol')"
                             autocomplete="symbol"
                         />
                         <InputError :message="form.errors.symbol" />

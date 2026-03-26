@@ -292,6 +292,12 @@
     "Enter counter number": "Enter counter number",
     "Symbol after number": "Symbol after number",
     "Enter counter symbol": "Enter counter symbol",
+    "Service": "Service",
+    "Services": "Services",
+    "Create new service": "Create new service",
+    "Edit service: :title": "Edit service: :title",
+    "Service title": "Service title",
+    "Enter the icon": "Enter the icon",
     "b": "b",
     "a": "a"
 }

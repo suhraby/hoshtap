@@ -322,6 +322,7 @@
 import { computed, ComputedRef, ref, type Component } from 'vue';
 
 import {
+    BoxIcon,
     BuildingIcon,
     ChevronDownIcon,
     GalleryIcon,
@@ -407,6 +408,12 @@ const menuGroups: MenuGroup[] = [
                 icon: StopwatchIcon,
                 name: wTrans('Counters'),
                 path: '/manage/counters',
+                exact: true,
+            },
+            {
+                icon: BoxIcon,
+                name: wTrans('Services'),
+                path: '/manage/services',
                 exact: true,
             },
             {

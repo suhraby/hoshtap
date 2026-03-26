@@ -32,7 +32,7 @@
                         v-for="locale in locales"
                         :key="locale.code"
                     >
-                        {{ (value as Record<string, string>)[locale.code] }}
+                        {{ (value as LocalizedText)[locale.code] }}
                     </span>
                 </template>
 
@@ -65,12 +65,12 @@ import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
-import type { Banner, PaginatedResponse } from '@/types';
+import type { Banner, LocalizedText, PaginatedResponse } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { wTrans } from 'laravel-vue-i18n';
 
 const { t } = useTranslatable();
-const {locales} = useLocales();
+const { locales } = useLocales();
 
 const currentPageTitle = wTrans('Banners');
 
