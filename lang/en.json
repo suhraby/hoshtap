@@ -298,6 +298,13 @@
     "Edit service: :title": "Edit service: :title",
     "Service title": "Service title",
     "Enter the icon": "Enter the icon",
+    "Product": "Product",
+    "Products": "Products",
+    "Create new product": "Create new product",
+    "Product title": "Product title",
+    "Product image": "Product image",
+    "Edit product: :title": "Edit product: :title",
+    "Are you sure you want to delete: :title?": "Are you sure you want to delete: :title?",
     "b": "b",
     "a": "a"
 }

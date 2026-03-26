@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AboutRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class AboutRequest extends FormRequest
         $rules = [
             'title'   => ['required', 'array'],
             'title.*' => ['required', 'string', 'max:255'],
-            'body'    => ['required', 'array'],
-            'body.*'  => ['required'],
             'file'    => ['nullable', 'file', 'image', 'max:1024'],
         ];
 

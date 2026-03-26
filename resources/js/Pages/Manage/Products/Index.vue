@@ -6,26 +6,29 @@
 
         <ComponentCard :title="currentPageTitle">
             <template #action>
-                <CreateButton :href="route('manage.services.create')" />
+                <CreateButton :href="route('manage.products.create')" />
             </template>
 
             <TableView
                 :columns="columns"
-                :data="services"
+                :data="products"
                 :initial-search="searchTerm"
                 :initial-limit="limit"
-                route-name="manage.services.index"
+                route-name="manage.products.index"
                 @edit="onEdit"
                 @delete="onDelete"
             >
-                <template #cell-icon="{ value }">
-                    <span v-html="normalizeSvg(value as string)"></span>
+                <template #cell-image="{ value }">
+                    <img
+                        :src="String(value)"
+                        class="h-14 w-20 rounded object-cover"
+                        alt="product"
+                    />
                 </template>
 
                 <template #cell-title="{ value }">
                     <span
                         class="block"
-                        v-if="typeof value === 'object'"
                         v-for="locale in locales"
                         :key="locale.code"
                     >
@@ -62,28 +65,28 @@ import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
-import type { LocalizedText, PaginatedResponse, Service } from '@/types';
+import type { LocalizedText, PaginatedResponse, Product } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { trans, wTrans } from 'laravel-vue-i18n';
 
 const { t } = useTranslatable();
 const { locales } = useLocales();
 
-const currentPageTitle = wTrans('Service');
+const currentPageTitle = wTrans('Products');
 
 const columns = [
-    { key: 'icon', label: wTrans('Icon'), sortable: false },
+    { key: 'image', label: wTrans('Image'), sortable: false },
     { key: 'title', label: wTrans('Title'), sortable: true },
 ];
 
 defineProps<{
-    services: PaginatedResponse<Service>;
+    products: PaginatedResponse<Product>;
     limit: number;
     searchTerm: string;
 }>();
 
 function onEdit(item: Record<string, unknown>): void {
-    router.get(route('manage.services.edit', { service: item.id }));
+    router.get(route('manage.products.edit', { product: item.id }));
 }
 
 function onDelete(item: Record<string, unknown>): void {
@@ -94,15 +97,10 @@ function onDelete(item: Record<string, unknown>): void {
             }),
         )
     )
-        router.delete(route('manage.services.destroy', { service: item.id }), {
-            preserveScroll: true,
-        });
-}
+        return;
 
-function normalizeSvg(svg: string): string {
-    return svg
-        .replace(/width="[^"]*"/i, '')
-        .replace(/height="[^"]*"/i, '')
-        .replace('<svg', '<svg width="50" height="50"');
+    router.delete(route('manage.products.destroy', { product: item.id }), {
+        preserveScroll: true,
+    });
 }
 </script>

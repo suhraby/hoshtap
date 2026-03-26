@@ -298,5 +298,12 @@
     "Edit service: :title": "Редактировать услугу: :title",
     "Service title": "Название услуги",
     "Enter the icon": "Введите иконку",
+    "Product": "Товар",
+    "Products": "Товары",
+    "Create new product": "Создать новый товар",
+    "Product title": "Название товара",
+    "Product image": "Изображение товара",
+    "Edit product: :title": "Редактировать товар: :title",
+    "Are you sure you want to delete: :title?": "Вы уверены, что хотите удалить: :title?",
     "a": "a"
 }

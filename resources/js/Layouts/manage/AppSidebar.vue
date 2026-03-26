@@ -330,6 +330,7 @@ import {
     GridIcon,
     HorizontalDots,
     ListIcon,
+    PlugInIcon,
     StopwatchIcon,
 } from '@/Components/manage/icons';
 import { useLocale } from '@/composables/useLocale';
@@ -411,9 +412,15 @@ const menuGroups: MenuGroup[] = [
                 exact: true,
             },
             {
-                icon: BoxIcon,
+                icon: PlugInIcon,
                 name: wTrans('Services'),
                 path: '/manage/services',
+                exact: true,
+            },
+            {
+                icon: BoxIcon,
+                name: wTrans('Products'),
+                path: '/manage/products',
                 exact: true,
             },
             {

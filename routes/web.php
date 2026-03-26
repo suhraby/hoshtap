@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Manage\AboutController;
 use App\Http\Controllers\Manage\BannerController;
 use App\Http\Controllers\Manage\CounterController;
+use App\Http\Controllers\Manage\ProductController;
 use App\Http\Controllers\Manage\ServiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -43,6 +44,8 @@ Route::middleware('auth')
         Route::resource('counters', CounterController::class)->except(['show']);
 
         Route::resource('services', ServiceController::class)->except(['show']);
+
+        Route::resource('products', ProductController::class)->except(['show']);
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

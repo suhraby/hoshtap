@@ -67,7 +67,7 @@ import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
 import type { Banner, LocalizedText, PaginatedResponse } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
-import { wTrans } from 'laravel-vue-i18n';
+import { trans, wTrans } from 'laravel-vue-i18n';
 
 const { t } = useTranslatable();
 const { locales } = useLocales();
@@ -90,10 +90,15 @@ function onEdit(item: Record<string, unknown>): void {
 }
 
 function onDelete(item: Record<string, unknown>): void {
-    if (!confirm(`Are you sure you want to delete ${t(item.title)}?`)) return;
-
-    router.delete(route('manage.banners.destroy', { banner: item.id }), {
-        preserveScroll: true,
-    });
+    if (
+        !confirm(
+            trans('Are you sure you want to delete: :title?', {
+                title: t(item.title),
+            }),
+        )
+    )
+        router.delete(route('manage.banners.destroy', { banner: item.id }), {
+            preserveScroll: true,
+        });
 }
 </script>

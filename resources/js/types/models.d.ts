@@ -41,3 +41,10 @@ export interface Service {
     icon: string;
     [key: string]: unknown;
 }
+
+export interface Product {
+    id: number;
+    title: LocalizedText;
+    image: string;
+    [key: string]: unknown;
+}

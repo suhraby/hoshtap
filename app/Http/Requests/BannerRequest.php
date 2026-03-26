@@ -22,9 +22,9 @@ class BannerRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title'     => ['required', 'array'],
-            'title.*'  => ['required', 'string', 'max:255'],
-            'file'      => ['nullable', 'file', 'image', 'max:1024'],
+            'title'   => ['required', 'array'],
+            'title.*' => ['required', 'string', 'max:255'],
+            'file'    => ['nullable', 'file', 'image', 'max:1024'],
         ];
 
         if ($this->isMethod('POST')) {

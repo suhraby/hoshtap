@@ -13,7 +13,7 @@ class Banner extends Model implements HasMedia
 {
     use HasTranslations, InteractsWithMedia;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'sort_order'];
 
     public array $translatable = ['title'];
 

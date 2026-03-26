@@ -298,5 +298,12 @@
     "Edit service: :title": "Hyzmat üýtgetmek: :title",
     "Service title": "Hyzmatyň ady",
     "Enter the icon": "Ikonka giriziň",
+    "Product": "Haryt",
+    "Products": "Harytlar",
+    "Create new product": "Täze haryt döretmek",
+    "Product title": "Harydyň ady",
+    "Product image": "Harydyň suraty",
+    "Edit product: :title": "Harydy üýtgetmek: :title",
+    "Are you sure you want to delete: :title?": "':title'-i/y pozmak isleýärsiňizmi?",
     "a": "a"
 }

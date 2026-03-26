@@ -27,7 +27,7 @@ class CounterRequest extends FormRequest
             'description'   => ['required', 'array'],
             'description.*' => ['required', 'string', 'max:255'],
             'number'        => ['required', 'integer', 'min:0'],
-            'symbol'          => ['nullable', 'string', 'max:255'],
+            'symbol'        => ['nullable', 'string', 'max:255'],
         ];
     }
 }
