@@ -58,6 +58,7 @@ class ServiceController extends Controller
         Service::create([
             'icon'   => $data['icon'],
             'title' => $data['title'],
+            'description' => $data['description'],
         ]);
 
         return Redirect::route('manage.services.index')->with('success', 'Service has been created.');
@@ -77,6 +78,7 @@ class ServiceController extends Controller
         $service->update([
             'icon'   => $data['icon'],
             'title' => $data['title'],
+            'description' => $data['description'],
         ]);
 
         return Redirect::route('manage.services.index')->with('success', 'Service has been updated.');

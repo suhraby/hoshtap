@@ -24,6 +24,8 @@ class ServiceRequest extends FormRequest
         return [
             'title'   => ['required', 'array'],
             'title.*' => ['required', 'string', 'max:255'],
+            'description'   => ['required', 'array'],
+            'description.*' => ['required', 'string', 'max:255'],
             'icon'    => ['required']
         ];
     }

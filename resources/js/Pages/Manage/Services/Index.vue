@@ -33,6 +33,17 @@
                     </span>
                 </template>
 
+                <template #cell-description="{ value }">
+                    <span
+                        class="block"
+                        v-if="typeof value === 'object'"
+                        v-for="locale in locales"
+                        :key="locale.code"
+                    >
+                        {{ (value as LocalizedText)[locale.code] }}
+                    </span>
+                </template>
+
                 <template #actions="{ item }">
                     <div class="flex items-center gap-2">
                         <button
@@ -74,6 +85,7 @@ const currentPageTitle = wTrans('Service');
 const columns = [
     { key: 'icon', label: wTrans('Icon'), sortable: false },
     { key: 'title', label: wTrans('Title'), sortable: true },
+    { key: 'description', label: wTrans('Description'), sortable: true },
 ];
 
 defineProps<{

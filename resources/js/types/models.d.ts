@@ -38,6 +38,7 @@ export interface Counter {
 export interface Service {
     id: number;
     title: LocalizedText;
+    description: LocalizedText;
     icon: string;
     [key: string]: unknown;
 }

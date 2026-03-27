@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('icon');
             $table->json('title');
+            $table->json('description');
             $table->unsignedInteger('sort_order')->default(0);
             $table->timestamps();
         });
