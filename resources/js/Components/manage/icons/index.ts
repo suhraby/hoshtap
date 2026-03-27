@@ -29,6 +29,7 @@ import HorizontalDots from './HorizontalDots.vue';
 import InfoCircleIcon from './InfoCircleIcon.vue';
 import InfoHexaIcon from './InfoHexaIcon.vue';
 import InfoIcon from './InfoIcon.vue';
+import LayerIcon from './LayerIcon.vue';
 import LayoutDashboardIcon from './LayoutDashboardIcon.vue';
 import ListIcon from './ListIcon.vue';
 import LogoutIcon from './LogoutIcon.vue';
@@ -36,6 +37,7 @@ import MailBox from './MailBox.vue';
 import MailIcon from './MailIcon.vue';
 import MenuIcon from './MenuIcon.vue';
 import Message2Line from './Message2Line.vue';
+import MonitorIcon from './MonitorIcon.vue';
 import PageIcon from './PageIcon.vue';
 import PaperclipIcon from './PaperclipIcon.vue';
 import PencilIcon from './PencilIcon.vue';
@@ -91,6 +93,7 @@ export {
     InfoCircleIcon,
     InfoHexaIcon,
     InfoIcon,
+    LayerIcon,
     LayoutDashboardIcon,
     ListIcon,
     LogoutIcon,
@@ -98,6 +101,7 @@ export {
     MailIcon,
     MenuIcon,
     Message2Line,
+    MonitorIcon,
     PageIcon,
     PaperclipIcon,
     PencilIcon,

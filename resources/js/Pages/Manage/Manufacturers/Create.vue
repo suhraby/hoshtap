@@ -1,8 +1,8 @@
 <template>
-    <Head :title="String(currentPageTitle)" />
+    <Head :title="currentPageTitle" />
 
     <AdminLayout>
-        <PageBreadcrumb :page-title="String(currentPageTitle)" />
+        <PageBreadcrumb :page-title="currentPageTitle" />
 
         <ComponentCard>
             <form @submit.prevent="onSubmit">
@@ -21,7 +21,7 @@
                                 type="text"
                                 v-model="form.title[locale.code]"
                                 :error="form.errors[`title.${locale.code}`]"
-                                :placeholder="`${$t('Product title')} — ${locale.label}`"
+                                :placeholder="`${$t('Manufacturer title')} — ${locale.label}`"
                             />
                             <InputError
                                 :message="form.errors[`title.${locale.code}`]"
@@ -32,25 +32,10 @@
 
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div class="sm:col-span-2">
-                        <InputLabel :value="$t('Product image')" />
-
-                        <div v-if="product.data.image" class="mb-3">
-                            <img
-                                :src="product.data.image"
-                                class="h-24 w-36 rounded-lg object-cover"
-                                alt="current product"
-                            />
-                            <p
-                                class="mt-1 text-xs text-gray-500 dark:text-gray-400"
-                            >
-                                {{
-                                    $t(
-                                        'Current image — upload a new one to replace it',
-                                    )
-                                }}
-                            </p>
-                        </div>
-
+                        <InputLabel
+                            :value="$t('Manufacturer image')"
+                            required
+                        />
                         <FileInput
                             accept="image/*"
                             :error="form.errors.file"
@@ -62,7 +47,7 @@
 
                 <div class="mt-6 flex items-center justify-end gap-3">
                     <Link
-                        :href="route('manage.products.index')"
+                        :href="route('manage.manufacturers.index')"
                         class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/5"
                     >
                         {{ $t('Cancel') }}
@@ -89,40 +74,26 @@ import FileInput from '@/Components/manage/forms/FileInput.vue';
 import InputError from '@/Components/manage/forms/InputError.vue';
 import InputField from '@/Components/manage/forms/InputField.vue';
 import InputLabel from '@/Components/manage/forms/InputLabel.vue';
-import { useLocale, useLocales } from '@/composables/useLocale';
+import { useLocales } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
-import type { Product, ResourceResponse } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { trans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
 
 const { locales } = useLocales();
-const { lang } = useLocale();
 
-const props = defineProps<{
-    product: ResourceResponse<Product>;
-}>();
-
-const currentPageTitle = computed(() =>
-    trans('Edit product: :title', {
-        title:
-            props.product.data.title[lang.value] ??
-            props.product.data.title['en'],
-    }),
-);
+const currentPageTitle = computed(() => trans('Create new manufacturer'));
 
 const form = useForm({
-    title: Object.fromEntries(
-        locales.value.map((l) => [
-            l.code,
-            props.product.data.title[l.code] ?? '',
-        ]),
-    ) as Record<string, string>,
+    title: Object.fromEntries(locales.value.map((l) => [l.code, ''])) as Record<
+        string,
+        string
+    >,
     file: null as File | null,
 });
 
 function onSubmit(): void {
-    form.patch(route('manage.products.update', props.product.data.id), {
+    form.post(route('manage.manufacturers.store'), {
         preserveScroll: true,
     });
 }

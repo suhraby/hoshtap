@@ -305,6 +305,12 @@
     "Product image": "Product image",
     "Edit product: :title": "Edit product: :title",
     "Are you sure you want to delete: :title?": "Are you sure you want to delete: :title?",
+    "Manufacturer": "Manufacturer",
+    "Manufacturers": "Manufacturers",
+    "Manufacturer title": "Manufacturer title",
+    "Manufacturer image": "Manufacturer image",
+    "Create new manufacturer": "Create new manufacturer",
+    "Edit manufacturer: :title": "Edit manufacturer: :title",
     "b": "b",
     "a": "a"
 }

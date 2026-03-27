@@ -330,6 +330,7 @@ import {
     GridIcon,
     HorizontalDots,
     ListIcon,
+    MonitorIcon,
     PlugInIcon,
     StopwatchIcon,
 } from '@/Components/manage/icons';
@@ -400,7 +401,7 @@ const menuGroups: MenuGroup[] = [
                 exact: true,
             },
             {
-                icon: BuildingIcon,
+                icon: MonitorIcon,
                 name: wTrans('About us'),
                 path: '/manage/about',
                 exact: true,
@@ -415,6 +416,12 @@ const menuGroups: MenuGroup[] = [
                 icon: PlugInIcon,
                 name: wTrans('Services'),
                 path: '/manage/services',
+                exact: true,
+            },
+            {
+                icon: BuildingIcon,
+                name: wTrans('Manufacturer'),
+                path: '/manage/manufacturers',
                 exact: true,
             },
             {

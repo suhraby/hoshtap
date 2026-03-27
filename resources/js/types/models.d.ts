@@ -48,3 +48,10 @@ export interface Product {
     image: string;
     [key: string]: unknown;
 }
+
+export interface Manufacturer {
+    id: number;
+    title: LocalizedText;
+    image: string;
+    [key: string]: unknown;
+}

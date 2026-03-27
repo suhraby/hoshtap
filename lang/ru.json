@@ -305,5 +305,11 @@
     "Product image": "Изображение товара",
     "Edit product: :title": "Редактировать товар: :title",
     "Are you sure you want to delete: :title?": "Вы уверены, что хотите удалить: :title?",
+    "Manufacturer": "Производитель",
+    "Manufacturers": "Производители",
+    "Manufacturer title": "Название производителя",
+    "Manufacturer image": "Изображение производителя",
+    "Create new manufacturer": "Создать нового производителя",
+    "Edit manufacturer: :title": "Редактировать производителя: :title",
     "a": "a"
 }
