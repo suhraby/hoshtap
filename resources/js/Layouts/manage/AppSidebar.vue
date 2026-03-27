@@ -330,7 +330,6 @@ import {
     GlobeIcon,
     GridIcon,
     HorizontalDots,
-    ListIcon,
     MonitorIcon,
     PlugInIcon,
     StopwatchIcon,
@@ -366,7 +365,6 @@ interface MenuGroup {
 const { lang, setLang } = useLocale();
 const { isExpanded, isMobileOpen, isHovered, openSubmenu } = useSidebar();
 const page = usePage();
-const currentPath = computed((): string => page.url.split('?')[0]);
 
 const locales: Locale[] = [
     { code: 'en', label: 'English' },
@@ -399,55 +397,43 @@ const menuGroups: MenuGroup[] = [
                 icon: GalleryIcon,
                 name: wTrans('Banners'),
                 path: '/manage/banners',
-                exact: true,
+                exact: false,
             },
             {
                 icon: MonitorIcon,
                 name: wTrans('About us'),
                 path: '/manage/about',
-                exact: true,
+                exact: false,
             },
             {
                 icon: StopwatchIcon,
                 name: wTrans('Counters'),
                 path: '/manage/counters',
-                exact: true,
+                exact: false,
             },
             {
                 icon: PlugInIcon,
                 name: wTrans('Services'),
                 path: '/manage/services',
-                exact: true,
+                exact: false,
             },
             {
                 icon: BuildingIcon,
                 name: wTrans('Manufacturer'),
                 path: '/manage/manufacturers',
-                exact: true,
+                exact: false,
             },
             {
                 icon: BoxIcon,
                 name: wTrans('Products'),
                 path: '/manage/products',
-                exact: true,
+                exact: false,
             },
             {
                 icon: BriefcaseIcon,
                 name: wTrans('Clients'),
                 path: '/manage/clients',
-                exact: true,
-            },
-            {
-                name: wTrans('Forms'),
-                icon: ListIcon,
-                subItems: [
-                    {
-                        name: wTrans('Form Elements'),
-                        path: '/manage/forms',
-                        exact: true,
-                        pro: false,
-                    },
-                ],
+                exact: false,
             },
         ],
     },
@@ -465,6 +451,8 @@ async function switchLocale(code: string): Promise<void> {
         isSwitching.value = false;
     }
 }
+
+const currentPath = computed((): string => page.url.split('?')[0]);
 
 function isActive(path: string, exact: boolean = false): boolean {
     if (exact) return currentPath.value === path;
