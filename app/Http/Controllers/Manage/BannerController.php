@@ -9,7 +9,6 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -68,14 +67,14 @@ class BannerController extends Controller
                 ->toMediaCollection('banner_image');
 
             DB::commit();
-            return Redirect::route('manage.banners.index')->with('success', 'Banner has been created.');
+            return redirect()->route('manage.banners.index')->with('success', __('Created msg', ['name' => __('Banner')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to create banner. Please try again.');
+                ->with('error', __('Failed to create data. Please try again.'));
         }
     }
 
@@ -105,14 +104,14 @@ class BannerController extends Controller
 
             DB::commit();
 
-            return Redirect::route('manage.banners.index')->with('success', 'Banner has been updated.');
+            return redirect()->route('manage.banners.index')->with('success', __('Updated msg', ['name' => __('Banner')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to update banner. Please try again.');
+                ->with('error', __('Failed to update data. Please try again.'));
         }
     }
 
@@ -120,6 +119,6 @@ class BannerController extends Controller
     {
         $banner->delete();
 
-        return Redirect::route('manage.banners.index')->with('warning', 'Banner has been deleted.');
+        return redirect()->route('manage.banners.index')->with('warning', __('Deleted msg', ['name' => __('Banner')]));
     }
 }

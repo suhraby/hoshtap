@@ -9,7 +9,6 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -68,14 +67,14 @@ class ClientController extends Controller
                 ->toMediaCollection('client_image');
 
             DB::commit();
-            return Redirect::route('manage.clients.index')->with('success', 'Client has been created.');
+            return redirect()->route('manage.clients.index')->with('success', __('Created msg', ['name' => __('Client')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to create client. Please try again.');
+                ->with('error', __('Failed to create data. Please try again.'));
         }
     }
 
@@ -105,14 +104,14 @@ class ClientController extends Controller
 
             DB::commit();
 
-            return Redirect::route('manage.clients.index')->with('success', 'Client has been updated.');
+            return redirect()->route('manage.clients.index')->with('success', __('Updated msg', ['name' => __('Client')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to update client. Please try again.');
+                ->with('error', __('Failed to update data. Please try again.'));
         }
     }
 
@@ -120,6 +119,6 @@ class ClientController extends Controller
     {
         $client->delete();
 
-        return Redirect::route('manage.clients.index')->with('warning', 'Client has been deleted.');
+        return redirect()->route('manage.clients.index')->with('warning', __('Deleted msg', ['name' => __('Client')]));
     }
 }

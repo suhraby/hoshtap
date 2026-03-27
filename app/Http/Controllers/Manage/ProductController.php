@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Manage;
 
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
@@ -68,14 +67,14 @@ class ProductController extends Controller
                 ->toMediaCollection('product_image');
 
             DB::commit();
-            return Redirect::route('manage.products.index')->with('success', 'Product has been created.');
+            return redirect()->route('manage.products.index')->with('success', __('Created msg', ['name' => __('Product')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to create product. Please try again.');
+                ->with('error', __('Failed to create data. Please try again.'));
         }
     }
 
@@ -105,14 +104,14 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return Redirect::route('manage.products.index')->with('success', 'Product has been updated.');
+            return redirect()->route('manage.products.index')->with('success', __('Updated msg', ['name' => __('Product')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to update product. Please try again.');
+                ->with('error', __('Failed to update data. Please try again.'));
         }
     }
 
@@ -120,6 +119,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return Redirect::route('manage.products.index')->with('warning', 'Product has been deleted.');
+        return redirect()->route('manage.products.index')->with('warning', __('Deleted msg', ['name' => __('Product')]));
     }
 }

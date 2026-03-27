@@ -320,5 +320,11 @@
     "Edit client: :title": "Müşderini üýtgetmek: :title",
     "Market title": "Market atlandyrmasy",
     "Market image": "Market surady",
+    "Created msg": ":name döredildi.",
+    "Updated msg": ":name üýtgedildi.",
+    "Deleted msg": ":name pozuldy.",
+    "Ordered msg": ":name tertiplendi.",
+    "Failed to create data. Please try again.": "Maglumat döredilmedi. Gaýtadan synanyşyp görüň.",
+    "Failed to update data. Please try again.": "Maglumat üýtgedilmedi. Gaýtadan synanyşyp görüň.",
     "a": "a"
 }

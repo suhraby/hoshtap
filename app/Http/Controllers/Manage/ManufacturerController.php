@@ -9,7 +9,6 @@ use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -68,14 +67,15 @@ class ManufacturerController extends Controller
                 ->toMediaCollection('manufacturer_image');
 
             DB::commit();
-            return Redirect::route('manage.manufacturers.index')->with('success', 'Manufacturer has been created.');
+
+            return redirect()->route('manage.manufacturers.index')->with('success', __('Created msg', ['name' => __('Manufacturer')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to create manufacturer. Please try again.');
+                ->with('error', __('Failed to create data. Please try again.'));
         }
     }
 
@@ -105,14 +105,14 @@ class ManufacturerController extends Controller
 
             DB::commit();
 
-            return Redirect::route('manage.manufacturers.index')->with('success', 'Manufacturer has been updated.');
+            return redirect()->route('manage.manufacturers.index')->with('success', __('Updated msg', ['name' => __('Manufacturer')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Post creation failed: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Failed to update manufacturer. Please try again.');
+                ->with('error', __('Failed to update data. Please try again.'));
         }
     }
 
@@ -120,6 +120,6 @@ class ManufacturerController extends Controller
     {
         $manufacturer->delete();
 
-        return Redirect::route('manage.manufacturers.index')->with('warning', 'Manufacturer has been deleted.');
+        return redirect()->route('manage.manufacturers.index')->with('warning', __('Deleted msg', ['name' => __('Manufacturer')]));
     }
 }

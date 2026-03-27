@@ -7,7 +7,6 @@ use App\Http\Requests\CounterRequest;
 use App\Http\Resources\CounterResource;
 use App\Models\Counter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CounterController extends Controller
@@ -62,7 +61,7 @@ class CounterController extends Controller
             'symbol' => $data['symbol'],
         ]);
 
-        return Redirect::route('manage.counters.index')->with('success', 'Counter has been created.');
+        return redirect()->route('manage.counters.index')->with('success', __('Created msg', ['name' => __('Counter')]));
     }
 
     public function edit(Counter $counter): \Inertia\Response
@@ -83,13 +82,13 @@ class CounterController extends Controller
             'symbol'        => $data['symbol'],
         ]);
 
-        return Redirect::route('manage.counters.index')->with('success', 'Counter has been updated.');
+        return redirect()->route('manage.counters.index')->with('success', __('Updated msg', ['name' => __('Counter')]));
     }
 
     public function destroy(Counter $counter): \Illuminate\Http\RedirectResponse
     {
         $counter->delete();
 
-        return Redirect::route('manage.counters.index')->with('warning', 'Counter has been deleted.');
+        return redirect()->route('manage.counters.index')->with('warning', __('Deleted msg', ['name' => __('Counter')]));
     }
 }

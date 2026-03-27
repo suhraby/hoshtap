@@ -320,6 +320,12 @@
     "Edit client: :title": "Edit client: :title",
     "Market title": "Market title",
     "Market image": "Market image",
+    "Created msg": ":name has been created.",
+    "Updated msg": ":name has been updated.",
+    "Deleted msg": ":name has been deleted.",
+    "Ordered msg": ":name has been ordered.",
+    "Failed to create data. Please try again.": "Failed to create data. Please try again.",
+    "Failed to update data. Please try again.": "Failed to update data. Please try again.",
     "b": "b",
     "a": "a"
 }

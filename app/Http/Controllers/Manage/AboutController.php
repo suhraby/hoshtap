@@ -8,7 +8,6 @@ use App\Http\Resources\AboutResource;
 use App\Models\About;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -57,12 +56,11 @@ class AboutController extends Controller
 
             DB::commit();
 
-            return Redirect::route('manage.about.index')
-                ->with('success', 'About us has been created.');
+            return redirect()->route('manage.about.index')->with('success', __('Created msg', ['name' => __('About us')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('About creation failed: ' . $e->getMessage());
-            return back()->withInput()->with('error', 'Failed to create. Please try again.');
+            return back()->withInput()->with('error', __('Failed to create data. Please try again.'));
         }
     }
 
@@ -89,8 +87,7 @@ class AboutController extends Controller
                 $about->addMediaFromRequest('file')
                     ->usingName($data['title']['en'])
                     ->usingFileName(
-                        Str::slug($data['title']['en']) . '.' .
-                            $request->file('file')->getClientOriginalExtension()
+                        Str::slug($data['title']['en']) . '.' . $request->file('file')->getClientOriginalExtension()
                     )
                     ->toMediaCollection('about_image');
             }
@@ -100,17 +97,16 @@ class AboutController extends Controller
                     ->usingName('market_file')
                     ->usingFileName(
                         'market_file.' . $request->file('market_file')->getClientOriginalExtension()
-                    )
-                    ->toMediaCollection('market_image');
+                    )->toMediaCollection('market_image');
             }
 
             DB::commit();
-            return Redirect::route('manage.about.index')
-                ->with('success', 'About us has been updated.');
+
+            return redirect()->route('manage.about.index')->with('success', __('Updated msg', ['name' => __('About us')]));
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('About update failed: ' . $e->getMessage());
-            return back()->withInput()->with('error', 'Failed to update. Please try again.');
+            return back()->withInput()->with('error', __('Failed to update data. Please try again.'));
         }
     }
 
@@ -118,6 +114,6 @@ class AboutController extends Controller
     {
         $about->delete();
 
-        return Redirect::route('manage.about.index')->with('warning', 'About us has been deleted.');
+        return redirect()->route('manage.about.index')->with('warning', __('Deleted msg', ['name' => __('About us')]));
     }
 }

@@ -320,5 +320,11 @@
     "Edit client: :title": "Редактировать клиента: :title",
     "Market title": "Название маркета",
     "Market image": "Изображение маркета",
+    "Created msg": ":name был создан.",
+    "Updated msg": ":name был обновлен.",
+    "Deleted msg": ":name был удален.",
+    "Ordered msg": ":name порядок.",
+    "Failed to create data. Please try again.": "Не удалось создать данные. Пожалуйста, попробуйте снова.",
+    "Failed to update data. Please try again.": "Не удалось обновить данные. Пожалуйста, попробуйте снова.",
     "a": "a"
 }

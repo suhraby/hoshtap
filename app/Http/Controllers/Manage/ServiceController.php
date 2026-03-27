@@ -7,7 +7,6 @@ use App\Http\Requests\ServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ServiceController extends Controller
@@ -61,7 +60,7 @@ class ServiceController extends Controller
             'description' => $data['description'],
         ]);
 
-        return Redirect::route('manage.services.index')->with('success', 'Service has been created.');
+        return redirect()->route('manage.services.index')->with('success', __('Created msg', ['name' => __('Service')]));
     }
 
     public function edit(Service $service): \Inertia\Response
@@ -81,13 +80,13 @@ class ServiceController extends Controller
             'description' => $data['description'],
         ]);
 
-        return Redirect::route('manage.services.index')->with('success', 'Service has been updated.');
+        return redirect()->route('manage.services.index')->with('success', __('Updated msg', ['name' => __('Service')]));
     }
 
     public function destroy(Service $service): \Illuminate\Http\RedirectResponse
     {
         $service->delete();
 
-        return Redirect::route('manage.services.index')->with('warning', 'Service has been deleted.');
+        return redirect()->route('manage.services.index')->with('warning', __('Deleted msg', ['name' => __('Service')]));
     }
 }
