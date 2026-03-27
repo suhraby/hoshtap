@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div class="sm:col-span-2">
                         <InputLabel :value="$t('About us image')" />
 
@@ -83,6 +83,70 @@
                             @change="form.file = $event"
                         />
                         <InputError :message="form.errors.file" />
+                    </div>
+                </div>
+
+                <div
+                    class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
+                >
+                    <div
+                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <div v-for="locale in locales" :key="locale.code">
+                            <InputLabel
+                                :for="'market-title-' + locale.code"
+                                required
+                            >
+                                {{ $t('Market title') }} ({{ locale.label }})
+                            </InputLabel>
+                            <InputField
+                                :id="'market-title-' + locale.code"
+                                type="text"
+                                v-model="form.market_title[locale.code]"
+                                :error="
+                                    form.errors[`market_title.${locale.code}`]
+                                "
+                                :placeholder="`${$t('Market title')} — ${locale.label}`"
+                            />
+                            <InputError
+                                :message="
+                                    form.errors[`market_title.${locale.code}`]
+                                "
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
+                        <InputLabel
+                            for="market_file"
+                            :value="$t('Market image')"
+                            required
+                        />
+                        <div v-if="about.data.market_image" class="mb-3">
+                            <img
+                                :src="about.data.market_image"
+                                class="h-24 w-36 rounded-lg object-cover"
+                                alt="current about us image"
+                            />
+                            <p
+                                class="mt-1 text-xs text-gray-500 dark:text-gray-400"
+                            >
+                                {{
+                                    $t(
+                                        'Current image — upload a new one to replace it',
+                                    )
+                                }}
+                            </p>
+                        </div>
+                        <FileInput
+                            id="market_file"
+                            accept="image/*"
+                            :error="form.errors.market_file"
+                            @change="form.market_file = $event"
+                        />
+                        <InputError :message="form.errors.market_file" />
                     </div>
                 </div>
 
@@ -140,7 +204,14 @@ const form = useForm({
     body: Object.fromEntries(
         locales.value.map((l) => [l.code, props.about.data.body[l.code] ?? '']),
     ) as Record<string, string>,
+    market_title: Object.fromEntries(
+        locales.value.map((l) => [
+            l.code,
+            props.about.data.market_title[l.code] ?? '',
+        ]),
+    ) as Record<string, string>,
     file: null as File | null,
+    market_file: null as File | null,
 });
 
 function onSubmit(): void {

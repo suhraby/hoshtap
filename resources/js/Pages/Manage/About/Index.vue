@@ -34,6 +34,11 @@
                         class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32"
                     >
                         <div>
+                            <p
+                                class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
+                            >
+                                {{ $t('About us image') }}
+                            </p>
                             <img
                                 :src="about.data.image"
                                 alt="about us image"
@@ -67,6 +72,33 @@
                                 :key="locale.code"
                             >
                                 {{ about.data.body[locale.code] }}
+                            </p>
+                        </div>
+
+                        <div>
+                            <p
+                                class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
+                            >
+                                {{ $t('Market image') }}
+                            </p>
+                            <img
+                                :src="about.data.market_image"
+                                alt="market image"
+                                class="h-auto w-36"
+                            />
+                        </div>
+                        <div>
+                            <p
+                                class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
+                            >
+                                {{ $t('Market title') }}
+                            </p>
+                            <p
+                                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                                v-for="locale in locales"
+                                :key="locale.code"
+                            >
+                                {{ about.data.market_title[locale.code] }}
                             </p>
                         </div>
                     </div>

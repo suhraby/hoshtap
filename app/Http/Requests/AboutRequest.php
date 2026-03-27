@@ -22,15 +22,19 @@ class AboutRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title'   => ['required', 'array'],
-            'title.*' => ['required', 'string', 'max:255'],
-            'body'    => ['required', 'array'],
-            'body.*'  => ['required'],
-            'file'    => ['nullable', 'file', 'image', 'max:1024'],
+            'title'          => ['required', 'array'],
+            'title.*'        => ['required', 'string', 'max:255'],
+            'body'           => ['required', 'array'],
+            'body.*'         => ['required'],
+            'market_title'   => ['required', 'array'],
+            'market_title.*' => ['required', 'string', 'max:255'],
+            'file'           => ['nullable', 'file', 'image', 'max:1024'],
+            'market_file'    => ['nullable', 'file', 'image', 'max:1024'],
         ];
 
         if ($this->isMethod('POST')) {
             $rules['file'] = ['required', 'file', 'image', 'max:1024'];
+            $rules['market_file'] = ['required', 'file', 'image', 'max:1024'];
         }
 
         return $rules;

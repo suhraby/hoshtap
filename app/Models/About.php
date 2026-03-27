@@ -13,13 +13,18 @@ class About extends Model implements HasMedia
 
     protected $table = 'about';
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'market_title'];
 
-    public array $translatable = ['title', 'body'];
+    public array $translatable = ['title', 'body', 'market_title'];
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('about_image')
+            ->singleFile()
+            ->useFallbackUrl('/images/placeholder.jpg')
+            ->useFallbackPath(public_path('/images/placeholder.jpg'));
+
+        $this->addMediaCollection('market_image')
             ->singleFile()
             ->useFallbackUrl('/images/placeholder.jpg')
             ->useFallbackPath(public_path('/images/placeholder.jpg'));

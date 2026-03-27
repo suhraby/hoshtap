@@ -56,10 +56,15 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div class="sm:col-span-2">
-                        <InputLabel :value="$t('About us image')" required />
+                        <InputLabel
+                            for="file"
+                            :value="$t('About us image')"
+                            required
+                        />
                         <FileInput
+                            id="file"
                             accept="image/*"
                             :error="form.errors.file"
                             @change="form.file = $event"
@@ -68,9 +73,57 @@
                     </div>
                 </div>
 
+                <div
+                    class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
+                >
+                    <div
+                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <div v-for="locale in locales" :key="locale.code">
+                            <InputLabel
+                                :for="'market-title-' + locale.code"
+                                required
+                            >
+                                {{ $t('Market title') }} ({{ locale.label }})
+                            </InputLabel>
+                            <InputField
+                                :id="'market-title-' + locale.code"
+                                type="text"
+                                v-model="form.market_title[locale.code]"
+                                :error="
+                                    form.errors[`market_title.${locale.code}`]
+                                "
+                                :placeholder="`${$t('Market title')} — ${locale.label}`"
+                            />
+                            <InputError
+                                :message="
+                                    form.errors[`market_title.${locale.code}`]
+                                "
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
+                        <InputLabel
+                            for="market_file"
+                            :value="$t('Market image')"
+                            required
+                        />
+                        <FileInput
+                            id="market_file"
+                            accept="image/*"
+                            :error="form.errors.market_file"
+                            @change="form.market_file = $event"
+                        />
+                        <InputError :message="form.errors.market_file" />
+                    </div>
+                </div>
+
                 <div class="mt-6 flex items-center justify-end gap-3">
                     <Link
-                        :href="route('manage.banners.index')"
+                        :href="route('manage.about.index')"
                         class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/5"
                     >
                         {{ $t('Cancel') }}
@@ -112,11 +165,15 @@ const form = useForm({
         string,
         string
     >,
+    market_title: Object.fromEntries(
+        locales.value.map((l) => [l.code, '']),
+    ) as Record<string, string>,
     body: Object.fromEntries(locales.value.map((l) => [l.code, ''])) as Record<
         string,
         string
     >,
     file: null as File | null,
+    market_file: null as File | null,
 });
 
 function onSubmit(): void {

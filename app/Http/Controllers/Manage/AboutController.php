@@ -37,6 +37,7 @@ class AboutController extends Controller
             $about = About::create([
                 'title' => $data['title'],
                 'body'  => $data['body'],
+                'market_title'  => $data['market_title'],
             ]);
 
             $about->addMediaFromRequest('file')
@@ -46,6 +47,13 @@ class AboutController extends Controller
                         $request->file('file')->getClientOriginalExtension()
                 )
                 ->toMediaCollection('about_image');
+
+            $about->addMediaFromRequest('market_file')
+                ->usingName('market_file')
+                ->usingFileName(
+                    'market_file.' . $request->file('market_file')->getClientOriginalExtension()
+                )
+                ->toMediaCollection('market_image');
 
             DB::commit();
 
@@ -74,6 +82,7 @@ class AboutController extends Controller
             $about->update([
                 'title' => $data['title'],
                 'body'  => $data['body'],
+                'market_title'  => $data['market_title'],
             ]);
 
             if ($request->hasFile('file')) {
@@ -84,6 +93,15 @@ class AboutController extends Controller
                             $request->file('file')->getClientOriginalExtension()
                     )
                     ->toMediaCollection('about_image');
+            }
+
+            if ($request->hasFile('market_file')) {
+                $about->addMediaFromRequest('market_file')
+                    ->usingName('market_file')
+                    ->usingFileName(
+                        'market_file.' . $request->file('market_file')->getClientOriginalExtension()
+                    )
+                    ->toMediaCollection('market_image');
             }
 
             DB::commit();

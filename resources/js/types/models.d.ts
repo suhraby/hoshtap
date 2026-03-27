@@ -21,8 +21,10 @@ export interface Banner {
 export interface About {
     id: number;
     title: LocalizedText;
+    market_title: LocalizedText;
     body: LocalizedText;
     image: string;
+    market_image: string;
 }
 
 export interface Counter {
