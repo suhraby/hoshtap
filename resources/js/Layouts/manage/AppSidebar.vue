@@ -323,6 +323,7 @@ import { computed, ComputedRef, ref, type Component } from 'vue';
 
 import {
     BoxIcon,
+    BriefcaseIcon,
     BuildingIcon,
     ChevronDownIcon,
     GalleryIcon,
@@ -428,6 +429,12 @@ const menuGroups: MenuGroup[] = [
                 icon: BoxIcon,
                 name: wTrans('Products'),
                 path: '/manage/products',
+                exact: true,
+            },
+            {
+                icon: BriefcaseIcon,
+                name: wTrans('Clients'),
+                path: '/manage/clients',
                 exact: true,
             },
             {

@@ -55,3 +55,10 @@ export interface Manufacturer {
     image: string;
     [key: string]: unknown;
 }
+
+export interface Client {
+    id: number;
+    title: LocalizedText;
+    image: string;
+    [key: string]: unknown;
+}

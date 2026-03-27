@@ -4,6 +4,7 @@ import BarChartIcon from './BarChartIcon.vue';
 import BellIcon from './BellIcon.vue';
 import BoxCubeIcon from './BoxCubeIcon.vue';
 import BoxIcon from './BoxIcon.vue';
+import BriefcaseIcon from './BriefcaseIcon.vue';
 import BuildingIcon from './BuildingIcon.vue';
 import Calendar2Line from './Calendar2Line.vue';
 import CalenderIcon from './CalenderIcon.vue';
@@ -68,6 +69,7 @@ export {
     BellIcon,
     BoxCubeIcon,
     BoxIcon,
+    BriefcaseIcon,
     BuildingIcon,
     Calendar2Line,
     CalenderIcon,

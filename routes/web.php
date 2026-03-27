@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Manage\AboutController;
 use App\Http\Controllers\Manage\BannerController;
+use App\Http\Controllers\Manage\ClientController;
 use App\Http\Controllers\Manage\CounterController;
 use App\Http\Controllers\Manage\ManufacturerController;
 use App\Http\Controllers\Manage\ProductController;
@@ -49,6 +50,8 @@ Route::middleware('auth')
         Route::resource('manufacturers', ManufacturerController::class)->except(['show']);
 
         Route::resource('products', ProductController::class)->except(['show']);
+
+        Route::resource('clients', ClientController::class)->except(['show']);
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

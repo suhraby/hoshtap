@@ -311,5 +311,11 @@
     "Manufacturer image": "Изображение производителя",
     "Create new manufacturer": "Создать нового производителя",
     "Edit manufacturer: :title": "Редактировать производителя: :title",
+    "Client": "Клиент",
+    "Clients": "Клиенты",
+    "Client title": "Название клиента",
+    "Client image": "Изображение клиента",
+    "Create new client": "Создать нового клиента",
+    "Edit client: :title": "Редактировать клиента: :title",
     "a": "a"
 }
