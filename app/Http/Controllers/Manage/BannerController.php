@@ -127,4 +127,30 @@ class BannerController extends Controller
 
         return redirect()->route('manage.banners.index')->with('warning', __('Deleted msg', ['name' => __('Banner')]));
     }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Banner::count() <= 1) {
+            return redirect()->route('manage.banners.index')->with('warning', __('You need must be at least one :name', ['name' => __('Banner')]));
+        }
+
+        $banners = Banner::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Banners/Order', [
+            'banners' => BannerResource::collection($banners),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Banner::count() <= 1) {
+            return redirect()->route('manage.banners.index')->with('warning', __('You need must be at least one :name', ['name' => __('Banner')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Banner::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.banners.index')->with('success', __('Ordered msg', ['name' => __('Banner')]));
+    }
 }

@@ -6,7 +6,7 @@
 
         <ComponentCard v-if="!about" :title="currentPageTitle">
             <template #action>
-                <CreateButton :href="route('manage.about.create')" />
+                <ActionButton :href="route('manage.about.create')" />
             </template>
 
             <div
@@ -117,8 +117,8 @@
 </template>
 
 <script setup lang="ts">
+import ActionButton from '@/Components/manage/common/ActionButton.vue';
 import ComponentCard from '@/Components/manage/common/ComponentCard.vue';
-import CreateButton from '@/Components/manage/common/CreateButton.vue';
 import PageBreadcrumb from '@/Components/manage/common/PageBreadcrumb.vue';
 import { PencilIcon } from '@/Components/manage/icons';
 import { useLocales } from '@/composables/useLocale';

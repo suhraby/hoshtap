@@ -6,7 +6,15 @@
 
         <ComponentCard :title="currentPageTitle">
             <template #action>
-                <CreateButton :href="route('manage.banners.create')" />
+                <ActionButton
+                    v-show="banners.data.length > 1"
+                    :href="route('manage.banners.sortOrder.form')"
+                    :label="$t('Sort order')"
+                    :default-icon="false"
+                >
+                    <SortIcon class="h-5 w-5" />
+                </ActionButton>
+                <ActionButton :href="route('manage.banners.create')" />
             </template>
 
             <TableView
@@ -58,10 +66,10 @@
 </template>
 
 <script setup lang="ts">
+import ActionButton from '@/Components/manage/common/ActionButton.vue';
 import ComponentCard from '@/Components/manage/common/ComponentCard.vue';
-import CreateButton from '@/Components/manage/common/CreateButton.vue';
 import PageBreadcrumb from '@/Components/manage/common/PageBreadcrumb.vue';
-import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
+import { PencilIcon, SortIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';

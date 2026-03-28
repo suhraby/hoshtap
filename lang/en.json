@@ -326,6 +326,7 @@
     "Ordered msg": ":name has been ordered.",
     "Failed to create data. Please try again.": "Failed to create data. Please try again.",
     "Failed to update data. Please try again.": "Failed to update data. Please try again.",
+    "You need must be at least one :name": "You need must be at least one :name",
     "b": "b",
     "a": "a"
 }

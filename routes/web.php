@@ -39,6 +39,8 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', fn() => Inertia::render('Manage/Index'))->name('index');
 
+        Route::get('banners/sort-order', [BannerController::class, 'sortOrderForm'])->name('banners.sortOrder.form');
+        Route::patch('banners/sort-order', [BannerController::class, 'sortOrder'])->name('banners.sortOrder');
         Route::resource('banners', BannerController::class)->except('show');
 
         Route::resource('about', AboutController::class)->middleware('single.about')->except(['show', 'destroy']);

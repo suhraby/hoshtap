@@ -49,6 +49,7 @@ import RefreshIcon from './RefreshIcon.vue';
 import SearchIcon from './SearchIcon.vue';
 import SendIcon from './SendIcon.vue';
 import SettingsIcon from './SettingsIcon.vue';
+import SortIcon from './SortIcon.vue';
 import StaredIcon from './StaredIcon.vue';
 import StopwatchIcon from './StopwatchIcon.vue';
 import SuccessIcon from './SuccessIcon.vue';
@@ -114,6 +115,7 @@ export {
     SearchIcon,
     SendIcon,
     SettingsIcon,
+    SortIcon,
     StaredIcon,
     StopwatchIcon,
     SuccessIcon,

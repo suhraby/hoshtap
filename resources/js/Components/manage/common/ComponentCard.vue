@@ -14,7 +14,9 @@
                     {{ title }}
                 </h3>
 
-                <slot name="action" />
+                <div class="flex items-center justify-end space-x-3">
+                    <slot name="action" />
+                </div>
             </div>
             <p
                 v-if="desc"
