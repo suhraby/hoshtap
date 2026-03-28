@@ -15,6 +15,7 @@ export interface Banner {
     image: string;
     thumbnail: string;
     original: string;
+    sort_order: number;
     [key: string]: unknown;
 }
 

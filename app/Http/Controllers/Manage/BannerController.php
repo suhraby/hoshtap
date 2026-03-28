@@ -16,6 +16,7 @@ class BannerController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
+        $locale = app()->getLocale();
         $limit     = (int) $request->query('limit', 20);
         $sortKey   = $request->query('sortKey', 'sort_order');
         $sortOrder = $request->query('sortOrder', 'asc');
@@ -34,8 +35,13 @@ class BannerController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $banners = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 

@@ -76,7 +76,8 @@ const currentPageTitle = wTrans('Banners');
 
 const columns = [
     { key: 'thumbnail', label: wTrans('Image'), sortable: false },
-    { key: 'title', label: wTrans('Title'), sortable: false },
+    { key: 'title', label: wTrans('Title'), sortable: true },
+    { key: 'sort_order', label: wTrans('Sort order'), sortable: true },
 ];
 
 defineProps<{
