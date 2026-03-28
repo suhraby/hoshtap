@@ -16,8 +16,8 @@ class BannerController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $locale = app()->getLocale();
-        $limit     = (int) $request->query('limit', 20);
+        $locale    = app()->getLocale();
+        $limit     = (int) $request->query('limit', 25);
         $sortKey   = $request->query('sortKey', 'sort_order');
         $sortOrder = $request->query('sortOrder', 'asc');
 

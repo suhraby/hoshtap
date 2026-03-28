@@ -16,7 +16,8 @@ class ProductController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $limit     = (int) $request->query('limit', 20);
+        $locale    = app()->getLocale();
+        $limit     = (int) $request->query('limit', 25);
         $sortKey   = $request->query('sortKey', 'sort_order');
         $sortOrder = $request->query('sortOrder', 'asc');
 
@@ -34,8 +35,13 @@ class ProductController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $products = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 
@@ -120,5 +126,31 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('manage.products.index')->with('warning', __('Deleted msg', ['name' => __('Product')]));
+    }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Product::count() <= 1) {
+            return redirect()->route('manage.products.index')->with('warning', __('You need must be at least one :name', ['name' => __('Product')]));
+        }
+
+        $products = Product::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Products/Order', [
+            'products' => ProductResource::collection($products),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Product::count() <= 1) {
+            return redirect()->route('manage.products.index')->with('warning', __('You need must be at least one :name', ['name' => __('Product')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Product::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.products.index')->with('success', __('Ordered msg', ['name' => __('Product')]));
     }
 }

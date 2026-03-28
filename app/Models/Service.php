@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasTranslations;
 
-    protected $fillable = ['title', 'description', 'icon'];
+    protected $fillable = ['title', 'description', 'icon', 'sort_order'];
 
     public array $translatable = ['title', 'description'];
 }

@@ -6,6 +6,14 @@
 
         <ComponentCard :title="currentPageTitle">
             <template #action>
+                <ActionButton
+                    v-show="services.data.length > 1"
+                    :href="route('manage.services.sortOrder.form')"
+                    :label="$t('Sort order')"
+                    :default-icon="false"
+                >
+                    <SortIcon class="h-5 w-5" />
+                </ActionButton>
                 <ActionButton :href="route('manage.services.create')" />
             </template>
 
@@ -69,7 +77,7 @@
 import ActionButton from '@/Components/manage/common/ActionButton.vue';
 import ComponentCard from '@/Components/manage/common/ComponentCard.vue';
 import PageBreadcrumb from '@/Components/manage/common/PageBreadcrumb.vue';
-import { PencilIcon, TrashBinIcon } from '@/Components/manage/icons';
+import { PencilIcon, SortIcon, TrashBinIcon } from '@/Components/manage/icons';
 import TableView from '@/Components/manage/table/TableView.vue';
 import { useLocales, useTranslatable } from '@/composables/useLocale';
 import AdminLayout from '@/Layouts/manage/AdminLayout.vue';
@@ -85,7 +93,8 @@ const currentPageTitle = wTrans('Service');
 const columns = [
     { key: 'icon', label: wTrans('Icon'), sortable: false },
     { key: 'title', label: wTrans('Title'), sortable: true },
-    { key: 'description', label: wTrans('Description'), sortable: true },
+    { key: 'description', label: wTrans('Description'), sortable: false },
+    { key: 'sort_order', label: wTrans('Sort order'), sortable: true },
 ];
 
 defineProps<{

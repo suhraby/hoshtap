@@ -45,14 +45,24 @@ Route::middleware('auth')
 
         Route::resource('about', AboutController::class)->middleware('single.about')->except(['show', 'destroy']);
 
+        Route::get('counters/sort-order', [CounterController::class, 'sortOrderForm'])->name('counters.sortOrder.form');
+        Route::patch('counters/sort-order', [CounterController::class, 'sortOrder'])->name('counters.sortOrder');
         Route::resource('counters', CounterController::class)->except(['show']);
 
+        Route::get('services/sort-order', [ServiceController::class, 'sortOrderForm'])->name('services.sortOrder.form');
+        Route::patch('services/sort-order', [ServiceController::class, 'sortOrder'])->name('services.sortOrder');
         Route::resource('services', ServiceController::class)->except(['show']);
 
+        Route::get('manufacturers/sort-order', [ManufacturerController::class, 'sortOrderForm'])->name('manufacturers.sortOrder.form');
+        Route::patch('manufacturers/sort-order', [ManufacturerController::class, 'sortOrder'])->name('manufacturers.sortOrder');
         Route::resource('manufacturers', ManufacturerController::class)->except(['show']);
 
+        Route::get('products/sort-order', [ProductController::class, 'sortOrderForm'])->name('products.sortOrder.form');
+        Route::patch('products/sort-order', [ProductController::class, 'sortOrder'])->name('products.sortOrder');
         Route::resource('products', ProductController::class)->except(['show']);
 
+        Route::get('clients/sort-order', [ClientController::class, 'sortOrderForm'])->name('clients.sortOrder.form');
+        Route::patch('clients/sort-order', [ClientController::class, 'sortOrder'])->name('clients.sortOrder');
         Route::resource('clients', ClientController::class)->except(['show']);
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

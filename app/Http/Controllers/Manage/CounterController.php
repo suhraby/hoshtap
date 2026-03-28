@@ -13,7 +13,8 @@ class CounterController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $limit      = $request->query('limit', 20);
+        $locale     = app()->getLocale();
+        $limit      = (int) $request->query('limit', 25);
         $sortKey    = $request->query('sortKey', 'sort_order');
         $sortOrder  = $request->query('sortOrder', 'asc');
         $searchTerm = $request->query('searchTerm', '');
@@ -33,8 +34,13 @@ class CounterController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $counters = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 
@@ -90,5 +96,31 @@ class CounterController extends Controller
         $counter->delete();
 
         return redirect()->route('manage.counters.index')->with('warning', __('Deleted msg', ['name' => __('Counter')]));
+    }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Counter::count() <= 1) {
+            return redirect()->route('manage.counters.index')->with('warning', __('You need must be at least one :name', ['name' => __('Counter')]));
+        }
+
+        $counters = Counter::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Counters/Order', [
+            'counters' => CounterResource::collection($counters),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Counter::count() <= 1) {
+            return redirect()->route('manage.counters.index')->with('warning', __('You need must be at least one :name', ['name' => __('Counter')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Counter::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.counters.index')->with('success', __('Ordered msg', ['name' => __('Counter')]));
     }
 }

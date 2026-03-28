@@ -43,6 +43,7 @@ export interface Service {
     title: LocalizedText;
     description: LocalizedText;
     icon: string;
+    sort_order: number;
     [key: string]: unknown;
 }
 
@@ -50,6 +51,7 @@ export interface Product {
     id: number;
     title: LocalizedText;
     image: string;
+    sort_order: number;
     [key: string]: unknown;
 }
 
@@ -64,5 +66,6 @@ export interface Client {
     id: number;
     title: LocalizedText;
     image: string;
+    sort_order: number;
     [key: string]: unknown;
 }

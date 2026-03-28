@@ -13,7 +13,8 @@ class ServiceController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $limit      = $request->query('limit', 20);
+        $locale     = app()->getLocale();
+        $limit      = (int) $request->query('limit', 25);
         $sortKey    = $request->query('sortKey', 'sort_order');
         $sortOrder  = $request->query('sortOrder', 'asc');
         $searchTerm = $request->query('searchTerm', '');
@@ -33,8 +34,13 @@ class ServiceController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $services = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 
@@ -88,5 +94,31 @@ class ServiceController extends Controller
         $service->delete();
 
         return redirect()->route('manage.services.index')->with('warning', __('Deleted msg', ['name' => __('Service')]));
+    }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Service::count() <= 1) {
+            return redirect()->route('manage.services.index')->with('warning', __('You need must be at least one :name', ['name' => __('Service')]));
+        }
+
+        $services = Service::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Services/Order', [
+            'services' => ServiceResource::collection($services),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Service::count() <= 1) {
+            return redirect()->route('manage.services.index')->with('warning', __('You need must be at least one :name', ['name' => __('Service')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Service::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.services.index')->with('success', __('Ordered msg', ['name' => __('Service')]));
     }
 }

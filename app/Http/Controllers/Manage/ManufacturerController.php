@@ -16,7 +16,8 @@ class ManufacturerController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $limit     = (int) $request->query('limit', 20);
+        $locale    = app()->getLocale();
+        $limit     = (int) $request->query('limit', 25);
         $sortKey   = $request->query('sortKey', 'sort_order');
         $sortOrder = $request->query('sortOrder', 'asc');
 
@@ -34,8 +35,13 @@ class ManufacturerController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $manufacturers = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 
@@ -121,5 +127,31 @@ class ManufacturerController extends Controller
         $manufacturer->delete();
 
         return redirect()->route('manage.manufacturers.index')->with('warning', __('Deleted msg', ['name' => __('Manufacturer')]));
+    }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Manufacturer::count() <= 1) {
+            return redirect()->route('manage.manufacturers.index')->with('warning', __('You need must be at least one :name', ['name' => __('Manufacturer')]));
+        }
+
+        $manufacturers = Manufacturer::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Manufacturers/Order', [
+            'manufacturers' => ManufacturerResource::collection($manufacturers),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Manufacturer::count() <= 1) {
+            return redirect()->route('manage.manufacturers.index')->with('warning', __('You need must be at least one :name', ['name' => __('Manufacturer')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Manufacturer::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.manufacturers.index')->with('success', __('Ordered msg', ['name' => __('Manufacturer')]));
     }
 }

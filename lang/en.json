@@ -327,6 +327,13 @@
     "Failed to create data. Please try again.": "Failed to create data. Please try again.",
     "Failed to update data. Please try again.": "Failed to update data. Please try again.",
     "You need must be at least one :name": "You need must be at least one :name",
+    "Sort order": "Sort order",
+    "Sort banners": "Sort banners",
+    "Sort counters": "Sort counters",
+    "Sort services": "Sort services",
+    "Sort manufacturers": "Sort manufacturers",
+    "Sort products": "Sort products",
+    "Sort clients": "Sort clients",
     "b": "b",
     "a": "a"
 }

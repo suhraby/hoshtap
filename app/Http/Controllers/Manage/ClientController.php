@@ -16,7 +16,8 @@ class ClientController extends Controller
 {
     public function index(Request $request): \Inertia\Response
     {
-        $limit     = (int) $request->query('limit', 20);
+        $locale    = app()->getLocale();
+        $limit     = (int) $request->query('limit', 25);
         $sortKey   = $request->query('sortKey', 'sort_order');
         $sortOrder = $request->query('sortOrder', 'asc');
 
@@ -34,8 +35,13 @@ class ClientController extends Controller
             $query->where('title', 'ILIKE', "%{$search}%");
         }
 
+        if ($sortKey === 'title') {
+            $query->orderByRaw("title->>'{$locale}' {$sortOrder}");
+        } else {
+            $query->orderBy($sortKey, $sortOrder);
+        }
+
         $clients = $query
-            ->orderBy($sortKey, $sortOrder)
             ->paginate($limit)
             ->withQueryString();
 
@@ -120,5 +126,31 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()->route('manage.clients.index')->with('warning', __('Deleted msg', ['name' => __('Client')]));
+    }
+
+    public function sortOrderForm(): \Inertia\Response | \Illuminate\Http\RedirectResponse
+    {
+        if (Client::count() <= 1) {
+            return redirect()->route('manage.clients.index')->with('warning', __('You need must be at least one :name', ['name' => __('Client')]));
+        }
+
+        $clients = Client::orderBy('sort_order')->get();
+
+        return Inertia::render('Manage/Clients/Order', [
+            'clients' => ClientResource::collection($clients),
+        ]);
+    }
+
+    public function sortOrder(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (Client::count() <= 1) {
+            return redirect()->route('manage.clients.index')->with('warning', __('You need must be at least one :name', ['name' => __('Client')]));
+        }
+
+        foreach ($request->input('ids', []) as $key => $id) {
+            Client::whereId($id)->update(['sort_order' => $key + 1]);
+        }
+
+        return redirect()->route('manage.clients.index')->with('success', __('Ordered msg', ['name' => __('Client')]));
     }
 }

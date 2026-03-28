@@ -15,9 +15,10 @@ class ClientResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'    => $this->id,
-            'title' => $this->getTranslations('title'),
-            'image' => $this->getFirstMediaUrl('client_image'),
+            'id'         => $this->id,
+            'sort_order' => $this->sort_order,
+            'title'      => $this->getTranslations('title'),
+            'image'      => $this->getFirstMediaUrl('client_image'),
         ];;
     }
 }
