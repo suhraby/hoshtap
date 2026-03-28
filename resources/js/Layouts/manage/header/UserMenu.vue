@@ -40,8 +40,8 @@
                 class="flex flex-col gap-1 border-b border-gray-200 pt-4 pb-3 dark:border-gray-800"
             >
                 <li v-for="item in menuItems" :key="item.href">
-                    <!-- :to="item.href" -->
-                    <a
+                    <Link
+                        :href="item.href"
                         class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
                     >
                         <component
@@ -49,7 +49,7 @@
                             class="text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
                         />
                         {{ item.text }}
-                    </a>
+                    </Link>
                 </li>
             </ul>
 
@@ -77,6 +77,7 @@ import {
     UserCircleIcon,
 } from '@/Components/manage/icons';
 import { Link, usePage } from '@inertiajs/vue3';
+import { wTrans } from 'laravel-vue-i18n';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const page = usePage();
@@ -85,7 +86,11 @@ const dropdownOpen = ref(false);
 const dropdownRef = ref(null);
 
 const menuItems = [
-    { href: '/manage/profile', icon: UserCircleIcon, text: 'Edit profile' },
+    {
+        href: '/manage/profile',
+        icon: UserCircleIcon,
+        text: wTrans('Edit profile'),
+    },
 ];
 
 const toggleDropdown = () => {
