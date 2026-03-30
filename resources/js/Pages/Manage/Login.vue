@@ -100,7 +100,7 @@
                                                 type="submit"
                                                 class="bg-brand-500 shadow-theme-xs hover:bg-brand-600 flex w-full items-center justify-center rounded-lg px-4 py-3 text-sm font-medium text-white transition"
                                             >
-                                                Sign In
+                                                {{ $t('Sign In') }}
                                             </button>
                                         </div>
                                     </div>
@@ -126,8 +126,11 @@
                             <p
                                 class="text-center text-gray-400 dark:text-white/60"
                             >
-                                Free and Open-Source Tailwind CSS Admin
-                                Dashboard Template
+                                {{
+                                    $t(
+                                        'Hostap is a major distributor of diverse food products from across the globe in Turkmenistan.',
+                                    )
+                                }}
                             </p>
                         </div>
                     </div>

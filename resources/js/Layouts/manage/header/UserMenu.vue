@@ -62,7 +62,7 @@
                 <LogoutIcon
                     class="text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300"
                 />
-                Log out
+                {{ $t('Log Out') }}
             </Link>
             <a> </a>
         </div>

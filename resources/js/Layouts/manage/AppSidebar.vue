@@ -24,19 +24,15 @@
             <Link :href="route('manage.index')">
                 <img
                     v-if="isExpanded || isHovered || isMobileOpen"
-                    class="dark:hidden"
-                    src="/images/logo/logo.svg"
+                    class="h-9 w-auto dark:hidden"
+                    src="/images/logo/logo-dark.svg"
                     alt="Logo"
-                    width="150"
-                    height="40"
                 />
                 <img
                     v-if="isExpanded || isHovered || isMobileOpen"
-                    class="hidden dark:block"
-                    src="/images/logo/logo-dark.svg"
+                    class="hidden h-9 w-auto dark:block"
+                    src="/images/logo/logo-light.svg"
                     alt="Logo"
-                    width="150"
-                    height="40"
                 />
                 <img
                     v-else
@@ -217,7 +213,7 @@
                             <template
                                 v-if="isExpanded || isHovered || isMobileOpen"
                             >
-                                Language
+                                {{ $t('Language') }}
                             </template>
                             <HorizontalDots v-else />
                         </h2>
