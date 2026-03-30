@@ -31,7 +31,6 @@ export interface About {
 export interface Counter {
     id: number;
     title: LocalizedText;
-    description: LocalizedText;
     number: number;
     symbol: string | null;
     sort_order: number;

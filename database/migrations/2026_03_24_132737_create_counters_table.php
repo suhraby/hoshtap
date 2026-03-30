@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('counters', function (Blueprint $table) {
             $table->id();
             $table->json('title');
-            $table->json('description');
             $table->unsignedInteger('number');
             $table->string('symbol')->nullable();
             $table->unsignedInteger('sort_order')->default(0);

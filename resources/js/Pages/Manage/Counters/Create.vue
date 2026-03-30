@@ -30,38 +30,6 @@
                     </div>
                 </div>
 
-                <div
-                    class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
-                >
-                    <div
-                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                    >
-                        <div v-for="locale in locales" :key="locale.code">
-                            <InputLabel
-                                :for="'description-' + locale.code"
-                                required
-                            >
-                                {{ $t('Description') }} ({{ locale.label }})
-                            </InputLabel>
-                            <InputField
-                                :id="'description-' + locale.code"
-                                type="text"
-                                v-model="form.description[locale.code]"
-                                :multiline="true"
-                                :error="
-                                    form.errors[`description.${locale.code}`]
-                                "
-                                :placeholder="`${$t('Counter description')} — ${locale.label}`"
-                            />
-                            <InputError
-                                :message="
-                                    form.errors[`description.${locale.code}`]
-                                "
-                            />
-                        </div>
-                    </div>
-                </div>
-
                 <div class="space-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                     <div>
                         <InputLabel
@@ -144,9 +112,6 @@ const form = useForm({
         string,
         string
     >,
-    description: Object.fromEntries(
-        locales.value.map((l) => [l.code, '']),
-    ) as Record<string, string>,
     number: null as number | null,
     symbol: null as string | null,
 });

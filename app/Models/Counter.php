@@ -11,11 +11,10 @@ class Counter extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'number',
         'symbol',
         'sort_order',
     ];
 
-    public array $translatable = ['title', 'description'];
+    public array $translatable = ['title'];
 }

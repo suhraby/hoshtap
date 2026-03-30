@@ -17,7 +17,6 @@ class CounterResource extends JsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->getTranslations('title'),
-            'description'   => $this->getTranslations('description'),
             'number'        => $this->number,
             'symbol'        => $this->symbol,
             'sort_order'    => $this->sort_order,

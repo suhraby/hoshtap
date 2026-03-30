@@ -36,16 +36,6 @@
                     </span>
                 </template>
 
-                <template #cell-description="{ value }">
-                    <span
-                        class="block"
-                        v-for="locale in locales"
-                        :key="locale.code"
-                    >
-                        {{ (value as LocalizedText)[locale.code] }}
-                    </span>
-                </template>
-
                 <template #actions="{ item }">
                     <div class="flex items-center gap-2">
                         <button
@@ -86,7 +76,6 @@ const currentPageTitle = wTrans('Counters');
 
 const columns = [
     { key: 'title', label: wTrans('Title'), sortable: true },
-    { key: 'description', label: wTrans('Description'), sortable: false },
     { key: 'number', label: wTrans('Number'), sortable: false },
     { key: 'symbol', label: wTrans('Symbol'), sortable: false },
     { key: 'sort_order', label: wTrans('Sort order'), sortable: true },
