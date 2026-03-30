@@ -56,10 +56,23 @@
 
 @theme {
   --font-*: initial;
-  --font-ibm-plex-sans:
-    'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-manrope: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-ibm-plex-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-manrope:
+    'Manrope', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-25: #f0f9f1;
+  --color-brand-50: #e1f3e5;
+  --color-brand-100: #c0e7ca;
+  --color-brand-200: #82ce96;
+  --color-brand-300: #4ead68;
+  --color-brand-400: #239443;
+  --color-brand-500: #037823;
+  --color-brand-600: #02601c;
+  --color-brand-700: #024d18;
+  --color-brand-800: #053d16;
+  --color-brand-900: #063315;
+  --color-brand-950: #031c0b;
 }
 
 @layer base {
@@ -72,6 +85,6 @@
   }
 
   body {
-    @apply font-ibm-plex-sans font-normal;
+    @apply font-manrope font-normal;
   }
 }
