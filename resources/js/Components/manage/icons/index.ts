@@ -38,6 +38,7 @@ import MailBox from './MailBox.vue';
 import MailIcon from './MailIcon.vue';
 import MenuIcon from './MenuIcon.vue';
 import Message2Line from './Message2Line.vue';
+import MessageIcon from './MessageIcon.vue';
 import MonitorIcon from './MonitorIcon.vue';
 import PageIcon from './PageIcon.vue';
 import PaperclipIcon from './PaperclipIcon.vue';
@@ -104,6 +105,7 @@ export {
     MailIcon,
     MenuIcon,
     Message2Line,
+    MessageIcon,
     MonitorIcon,
     PageIcon,
     PaperclipIcon,

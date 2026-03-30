@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Manage\AboutController;
 use App\Http\Controllers\Manage\BannerController;
 use App\Http\Controllers\Manage\ClientController;
+use App\Http\Controllers\Manage\ContactController;
 use App\Http\Controllers\Manage\CounterController;
 use App\Http\Controllers\Manage\ManufacturerController;
 use App\Http\Controllers\Manage\ProductController;
@@ -65,9 +66,10 @@ Route::middleware('auth')
         Route::patch('clients/sort-order', [ClientController::class, 'sortOrder'])->name('clients.sortOrder');
         Route::resource('clients', ClientController::class)->except(['show']);
 
+        Route::resource('contacts', ContactController::class)->only(['index', 'edit', 'update']);
+
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });

@@ -69,3 +69,13 @@ export interface Client {
     sort_order: number;
     [key: string]: unknown;
 }
+
+export interface Contact {
+    id: number;
+    icon: string;
+    slug: string;
+    value: LocalizedText | string;
+    locale_value: LocalizedText;
+    is_active: boolean;
+    [key: string]: unknown;
+}

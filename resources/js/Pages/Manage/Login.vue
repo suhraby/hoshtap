@@ -15,12 +15,16 @@
                                 <h1
                                     class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90"
                                 >
-                                    Sign In
+                                    {{ $t('Sign In') }}
                                 </h1>
                                 <p
                                     class="text-sm text-gray-500 dark:text-gray-400"
                                 >
-                                    Enter your email and password to sign in!
+                                    {{
+                                        $t(
+                                            'Enter your username and password to sign in!',
+                                        )
+                                    }}
                                 </p>
                             </div>
                             <div>
@@ -29,7 +33,7 @@
                                         <div>
                                             <InputLabel
                                                 for="username"
-                                                value="Username"
+                                                :value="$t('Username')"
                                                 required
                                             />
                                             <InputField
@@ -39,7 +43,9 @@
                                                 required
                                                 v-model="form.username"
                                                 :error="form.errors.username"
-                                                placeholder="Enter your username"
+                                                :placeholder="
+                                                    $t('Enter your username')
+                                                "
                                                 autocomplete="username"
                                                 autofocus="username"
                                             />
@@ -51,7 +57,7 @@
                                         <div>
                                             <InputLabel
                                                 for="password"
-                                                value="Password"
+                                                :value="$t('Password')"
                                                 required
                                             />
                                             <InputField
@@ -62,7 +68,9 @@
                                                 v-model="form.password"
                                                 :error="form.errors.password"
                                                 :is-password-field="true"
-                                                placeholder="Enter your password"
+                                                :placeholder="
+                                                    $t('Enter your password')
+                                                "
                                                 autocomplete="password"
                                             />
                                             <InputError
@@ -80,9 +88,9 @@
                                                         form.remember
                                                     "
                                                 >
-                                                    <span
-                                                        >Keep me logged in</span
-                                                    >
+                                                    <span>{{
+                                                        $t('Keep me logged in')
+                                                    }}</span>
                                                 </Checkbox>
                                             </div>
                                         </div>
