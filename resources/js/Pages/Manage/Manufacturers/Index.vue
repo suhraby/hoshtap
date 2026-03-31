@@ -29,7 +29,7 @@
                 <template #cell-image="{ value }">
                     <img
                         :src="String(value)"
-                        class="h-14 w-20 rounded object-cover"
+                        class="h-8 w-auto rounded object-cover"
                         alt="manufacturer"
                     />
                 </template>

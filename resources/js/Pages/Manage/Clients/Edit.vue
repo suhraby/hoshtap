@@ -37,7 +37,7 @@
                         <div v-if="client.data.image" class="mb-3">
                             <img
                                 :src="client.data.image"
-                                class="h-24 w-36 rounded-lg object-cover"
+                                class="h-20 w-auto rounded-lg object-cover"
                                 alt="current client"
                             />
                             <p

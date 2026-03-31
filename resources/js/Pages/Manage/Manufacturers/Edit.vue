@@ -37,7 +37,7 @@
                         <div v-if="manufacturer.data.image" class="mb-3">
                             <img
                                 :src="manufacturer.data.image"
-                                class="h-24 w-36 rounded-lg object-cover"
+                                class="h-20 w-auto rounded-lg object-cover"
                                 alt="current manufacturer"
                             />
                             <p

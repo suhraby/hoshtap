@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CounterSeeder::class,
             ServiceSeeder::class,
             ManufacturerSeeder::class,
+            ClientSeeder::class,
         ]);
     }
 }
