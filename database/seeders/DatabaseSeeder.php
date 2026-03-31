@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             ManufacturerSeeder::class,
             ClientSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
