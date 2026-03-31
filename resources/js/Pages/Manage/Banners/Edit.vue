@@ -34,10 +34,10 @@
                     <div class="sm:col-span-2">
                         <InputLabel :value="$t('Banner image')" />
 
-                        <div v-if="banner.data.thumbnail" class="mb-3">
+                        <div v-if="banner.data.image" class="mb-3">
                             <img
-                                :src="banner.data.thumbnail"
-                                class="h-24 w-36 rounded-lg object-cover"
+                                :src="banner.data.image"
+                                class="h-24 w-auto rounded-lg object-cover"
                                 alt="current banner"
                             />
                             <p

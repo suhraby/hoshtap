@@ -29,7 +29,7 @@
                 <template #cell-thumbnail="{ value }">
                     <img
                         :src="String(value)"
-                        class="h-14 w-20 rounded object-cover"
+                        class="h-14 w-32 rounded object-cover"
                         alt="banner"
                     />
                 </template>
