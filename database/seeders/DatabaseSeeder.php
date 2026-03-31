@@ -14,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        if (app()->environment('local')) {
+            $this->call(RemoveFilesSeeder::class);
+        }
+
         $this->call([
             UserSeeder::class,
             ContactSeeder::class,
             CounterSeeder::class,
             ServiceSeeder::class,
+            ManufacturerSeeder::class,
         ]);
     }
 }
