@@ -34,9 +34,11 @@ class AboutController extends Controller
             $data = $request->validated();
 
             $about = About::create([
-                'title' => $data['title'],
-                'body'  => $data['body'],
+                'title'         => $data['title'],
+                'body'          => $data['body'],
+                'context'       => $data['context'],
                 'market_title'  => $data['market_title'],
+                'product_range' => $data['product_range'],
             ]);
 
             $about->addMediaFromRequest('file')
@@ -78,9 +80,11 @@ class AboutController extends Controller
             $data = $request->validated();
 
             $about->update([
-                'title' => $data['title'],
-                'body'  => $data['body'],
+                'title'         => $data['title'],
+                'body'          => $data['body'],
+                'context'       => $data['context'],
                 'market_title'  => $data['market_title'],
+                'product_range' => $data['product_range'],
             ]);
 
             if ($request->hasFile('file')) {

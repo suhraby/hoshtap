@@ -75,6 +75,21 @@
                             </p>
                         </div>
 
+                        <div class="sm:col-span-2">
+                            <p
+                                class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
+                            >
+                                {{ $t('Context') }}
+                            </p>
+                            <p
+                                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                                v-for="locale in locales"
+                                :key="locale.code"
+                            >
+                                {{ about.data.context[locale.code] }}
+                            </p>
+                        </div>
+
                         <div>
                             <p
                                 class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
@@ -99,6 +114,21 @@
                                 :key="locale.code"
                             >
                                 {{ about.data.market_title[locale.code] }}
+                            </p>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <p
+                                class="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400"
+                            >
+                                {{ $t('Product range') }}
+                            </p>
+                            <p
+                                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                                v-for="locale in locales"
+                                :key="locale.code"
+                            >
+                                {{ about.data.product_range[locale.code] }}
                             </p>
                         </div>
                     </div>

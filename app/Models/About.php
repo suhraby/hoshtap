@@ -13,9 +13,21 @@ class About extends Model implements HasMedia
 
     protected $table = 'about';
 
-    protected $fillable = ['title', 'body', 'market_title'];
+    protected $fillable = [
+        'title',
+        'body',
+        'context',
+        'market_title',
+        'product_range',
+    ];
 
-    public array $translatable = ['title', 'body', 'market_title'];
+    public array $translatable = [
+        'title',
+        'body',
+        'context',
+        'market_title',
+        'product_range',
+    ];
 
     public function registerMediaCollections(): void
     {

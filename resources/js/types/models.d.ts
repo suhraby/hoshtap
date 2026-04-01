@@ -24,6 +24,8 @@ export interface About {
     title: LocalizedText;
     market_title: LocalizedText;
     body: LocalizedText;
+    context: LocalizedText;
+    product_range: LocalizedText;
     image: string;
     market_image: string;
 }

@@ -33,7 +33,9 @@
                 <div
                     class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
                 >
-                    <div class="grid grid-cols-1 gap-6">
+                    <div
+                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
                         <div v-for="locale in locales" :key="locale.code">
                             <InputLabel
                                 :for="'description-' + locale.code"
@@ -51,6 +53,34 @@
                             />
                             <InputError
                                 :message="form.errors[`body.${locale.code}`]"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="t-inputs mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
+                >
+                    <div
+                        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <div v-for="locale in locales" :key="locale.code">
+                            <InputLabel
+                                :for="'context-' + locale.code"
+                                required
+                            >
+                                {{ $t('Context') }} ({{ locale.label }})
+                            </InputLabel>
+                            <InputField
+                                :id="'context-' + locale.code"
+                                type="text"
+                                :multiline="true"
+                                v-model="form.context[locale.code]"
+                                :error="form.errors[`context.${locale.code}`]"
+                                :placeholder="`${$t('About us context')} — ${locale.label}`"
+                            />
+                            <InputError
+                                :message="form.errors[`context.${locale.code}`]"
                             />
                         </div>
                     </div>
@@ -111,6 +141,38 @@
                             <InputError
                                 :message="
                                     form.errors[`market_title.${locale.code}`]
+                                "
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="mb-6 rounded-2xl border border-gray-200 p-5 lg:p-6 dark:border-gray-800"
+                >
+                    <div
+                        class="t-inputs grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <div v-for="locale in locales" :key="locale.code">
+                            <InputLabel
+                                :for="'product_range-' + locale.code"
+                                required
+                            >
+                                {{ $t('Product range') }} ({{ locale.label }})
+                            </InputLabel>
+                            <InputField
+                                :id="'product_range-' + locale.code"
+                                type="text"
+                                :multiline="true"
+                                v-model="form.product_range[locale.code]"
+                                :error="
+                                    form.errors[`product_range.${locale.code}`]
+                                "
+                                :placeholder="`${$t('Product range')} — ${locale.label}`"
+                            />
+                            <InputError
+                                :message="
+                                    form.errors[`product_range.${locale.code}`]
                                 "
                             />
                         </div>
@@ -204,10 +266,22 @@ const form = useForm({
     body: Object.fromEntries(
         locales.value.map((l) => [l.code, props.about.data.body[l.code] ?? '']),
     ) as Record<string, string>,
+    context: Object.fromEntries(
+        locales.value.map((l) => [
+            l.code,
+            props.about.data.context[l.code] ?? '',
+        ]),
+    ) as Record<string, string>,
     market_title: Object.fromEntries(
         locales.value.map((l) => [
             l.code,
             props.about.data.market_title[l.code] ?? '',
+        ]),
+    ) as Record<string, string>,
+    product_range: Object.fromEntries(
+        locales.value.map((l) => [
+            l.code,
+            props.about.data.product_range[l.code] ?? '',
         ]),
     ) as Record<string, string>,
     file: null as File | null,
@@ -220,3 +294,9 @@ function onSubmit(): void {
     });
 }
 </script>
+
+<style scoped>
+.t-inputs textarea {
+    height: 120px;
+}
+</style>

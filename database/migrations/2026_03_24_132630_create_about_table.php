@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->json('title');
             $table->json('body');
+            $table->json('context');
             $table->json('market_title');
+            $table->json('product_range');
             $table->timestamps();
         });
     }
