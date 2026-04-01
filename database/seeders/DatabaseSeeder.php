@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BannerSeeder::class,
             ContactSeeder::class,
-            // AboutSeeder::class,
+            AboutSeeder::class,
             CounterSeeder::class,
             ServiceSeeder::class,
             ManufacturerSeeder::class,
