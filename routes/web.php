@@ -11,13 +11,12 @@ use App\Http\Controllers\Manage\ManufacturerController;
 use App\Http\Controllers\Manage\ProductController;
 use App\Http\Controllers\Manage\ServiceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('App/Index');
-})->name('index');
+Route::get('/', [WebController::class, 'index'])->name('index');
 
 Route::post('locale/switch', function (Request $request) {
     $locale = $request->validate(['locale' => 'required|in:en,ru,tm'])['locale'];

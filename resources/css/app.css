@@ -4,31 +4,6 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-/* imb-plex-sans */
-@font-face {
-  font-display: swap;
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/ibm-plex-sans/ibm-plex-sans-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/ibm-plex-sans/ibm-plex-sans-500.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/ibm-plex-sans/ibm-plex-sans-600.woff2') format('woff2');
-}
-
 /* manrope */
 @font-face {
   font-display: swap;
@@ -61,6 +36,10 @@
     'Manrope', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji', ui-sans-serif, system-ui, sans-serif;
 
+  --color-light-gray: #f7f7f7;
+  --color-nickel: #959595;
+  --color-off-black: #232323;
+
   --color-brand-25: #f0f9f1;
   --color-brand-50: #e1f3e5;
   --color-brand-100: #c0e7ca;
@@ -87,4 +66,39 @@
   body {
     @apply font-manrope font-normal;
   }
+}
+
+@utility h-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  @variant sm {
+    padding-inline: 30px;
+  }
+  @variant md {
+    padding-inline: 36px;
+  }
+  @variant lg {
+    padding-inline: 40px;
+  }
+  @variant xl {
+    padding-inline: 44px;
+  }
+  @variant 2xl {
+    padding-inline: 60px;
+  }
+}
+
+@utility counter-item {
+  border-left: 1px solid red;
+}
+
+@utility full-object {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
 }
